@@ -10,7 +10,9 @@ import 'package:mpit_final_2024_app/injection.dart';
 
 @RoutePage()
 class ChatbotScreen extends StatefulWidget {
-  const ChatbotScreen({super.key});
+  const ChatbotScreen({super.key, this.initialQuery});
+
+  final String? initialQuery;
 
   @override
   State<ChatbotScreen> createState() => _ChatbotScreenState();
@@ -23,6 +25,15 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
 
   bool isAvailable = true;
   final messageController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialQuery != null) {
+      messageController.text = widget.initialQuery ?? '';
+      sendUserMessage();
+    }
+  }
 
   void sendUserMessage() async {
     final message = messageController.text;

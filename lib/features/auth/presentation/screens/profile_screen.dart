@@ -1,13 +1,8 @@
 import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:mpit_final_2024_app/core/components/avatar.dart';
 import 'package:mpit_final_2024_app/core/routes/router.gr.dart';
 import 'package:mpit_final_2024_app/features/auth/domain/cubit/auth_cubit.dart';
-import 'package:mpit_final_2024_app/features/auth/domain/repositories/auth_repository.dart';
-import 'package:mpit_final_2024_app/features/auth/presentation/widgets/avatar_viewer.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.models.swagger.dart';
-import 'package:mpit_final_2024_app/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -91,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onPressed: () async {
                   await context.read<AuthCubit>().logout();
                   if (context.mounted) {
-                    context.router.navigate(MainRoute());
+                    context.router.navigate(GlobalRoute());
                   }
                 },
                 child: Text(
