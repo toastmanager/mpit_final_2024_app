@@ -822,6 +822,7 @@ extension $AskArticlesChatbotDtoExtension on AskArticlesChatbotDto {
 class CreateHelpRequestDto {
   const CreateHelpRequestDto({
     required this.text,
+    required this.title,
     required this.type,
   });
 
@@ -833,6 +834,8 @@ class CreateHelpRequestDto {
 
   @JsonKey(name: 'text')
   final String text;
+  @JsonKey(name: 'title')
+  final String title;
   @JsonKey(
     name: 'type',
     toJson: createHelpRequestDtoTypeToJson,
@@ -847,6 +850,8 @@ class CreateHelpRequestDto {
         (other is CreateHelpRequestDto &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)));
   }
@@ -857,21 +862,27 @@ class CreateHelpRequestDto {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(text) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(type) ^
       runtimeType.hashCode;
 }
 
 extension $CreateHelpRequestDtoExtension on CreateHelpRequestDto {
   CreateHelpRequestDto copyWith(
-      {String? text, enums.CreateHelpRequestDtoType? type}) {
+      {String? text, String? title, enums.CreateHelpRequestDtoType? type}) {
     return CreateHelpRequestDto(
-        text: text ?? this.text, type: type ?? this.type);
+        text: text ?? this.text,
+        title: title ?? this.title,
+        type: type ?? this.type);
   }
 
   CreateHelpRequestDto copyWithWrapped(
-      {Wrapped<String>? text, Wrapped<enums.CreateHelpRequestDtoType>? type}) {
+      {Wrapped<String>? text,
+      Wrapped<String>? title,
+      Wrapped<enums.CreateHelpRequestDtoType>? type}) {
     return CreateHelpRequestDto(
         text: (text != null ? text.value : this.text),
+        title: (title != null ? title.value : this.title),
         type: (type != null ? type.value : this.type));
   }
 }
@@ -880,6 +891,7 @@ extension $CreateHelpRequestDtoExtension on CreateHelpRequestDto {
 class HelpRequestDto {
   const HelpRequestDto({
     required this.uuid,
+    required this.title,
     required this.text,
     required this.requesterId,
     this.volunteerId,
@@ -897,6 +909,8 @@ class HelpRequestDto {
 
   @JsonKey(name: 'uuid')
   final String uuid;
+  @JsonKey(name: 'title')
+  final String title;
   @JsonKey(name: 'text')
   final String text;
   @JsonKey(name: 'requesterId')
@@ -927,6 +941,8 @@ class HelpRequestDto {
         (other is HelpRequestDto &&
             (identical(other.uuid, uuid) ||
                 const DeepCollectionEquality().equals(other.uuid, uuid)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
             (identical(other.requesterId, requesterId) ||
@@ -953,6 +969,7 @@ class HelpRequestDto {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(uuid) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(text) ^
       const DeepCollectionEquality().hash(requesterId) ^
       const DeepCollectionEquality().hash(volunteerId) ^
@@ -966,6 +983,7 @@ class HelpRequestDto {
 extension $HelpRequestDtoExtension on HelpRequestDto {
   HelpRequestDto copyWith(
       {String? uuid,
+      String? title,
       String? text,
       double? requesterId,
       double? volunteerId,
@@ -975,6 +993,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
       DateTime? updatedAt}) {
     return HelpRequestDto(
         uuid: uuid ?? this.uuid,
+        title: title ?? this.title,
         text: text ?? this.text,
         requesterId: requesterId ?? this.requesterId,
         volunteerId: volunteerId ?? this.volunteerId,
@@ -986,6 +1005,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
 
   HelpRequestDto copyWithWrapped(
       {Wrapped<String>? uuid,
+      Wrapped<String>? title,
       Wrapped<String>? text,
       Wrapped<double>? requesterId,
       Wrapped<double?>? volunteerId,
@@ -995,6 +1015,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
       Wrapped<DateTime>? updatedAt}) {
     return HelpRequestDto(
         uuid: (uuid != null ? uuid.value : this.uuid),
+        title: (title != null ? title.value : this.title),
         text: (text != null ? text.value : this.text),
         requesterId:
             (requesterId != null ? requesterId.value : this.requesterId),
@@ -1011,6 +1032,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
 class UpdateHelpRequestDto {
   const UpdateHelpRequestDto({
     this.text,
+    this.title,
     this.type,
   });
 
@@ -1022,6 +1044,8 @@ class UpdateHelpRequestDto {
 
   @JsonKey(name: 'text')
   final String? text;
+  @JsonKey(name: 'title')
+  final String? title;
   @JsonKey(
     name: 'type',
     toJson: updateHelpRequestDtoTypeNullableToJson,
@@ -1036,6 +1060,8 @@ class UpdateHelpRequestDto {
         (other is UpdateHelpRequestDto &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)));
   }
@@ -1046,22 +1072,27 @@ class UpdateHelpRequestDto {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(text) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(type) ^
       runtimeType.hashCode;
 }
 
 extension $UpdateHelpRequestDtoExtension on UpdateHelpRequestDto {
   UpdateHelpRequestDto copyWith(
-      {String? text, enums.UpdateHelpRequestDtoType? type}) {
+      {String? text, String? title, enums.UpdateHelpRequestDtoType? type}) {
     return UpdateHelpRequestDto(
-        text: text ?? this.text, type: type ?? this.type);
+        text: text ?? this.text,
+        title: title ?? this.title,
+        type: type ?? this.type);
   }
 
   UpdateHelpRequestDto copyWithWrapped(
       {Wrapped<String?>? text,
+      Wrapped<String?>? title,
       Wrapped<enums.UpdateHelpRequestDtoType?>? type}) {
     return UpdateHelpRequestDto(
         text: (text != null ? text.value : this.text),
+        title: (title != null ? title.value : this.title),
         type: (type != null ? type.value : this.type));
   }
 }

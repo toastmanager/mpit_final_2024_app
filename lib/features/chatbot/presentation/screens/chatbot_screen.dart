@@ -18,8 +18,7 @@ class ChatbotScreen extends StatefulWidget {
 
 class _ChatbotScreenState extends State<ChatbotScreen> {
   final List<ChatbotMessage> messages = [
-    ChatbotMessage(isUser: true, message: 'Привет, мостовщик!'),
-    ChatbotMessage(isUser: false, message: 'Здравствуйте, благополучатель!'),
+    ChatbotMessage(isUser: false, message: 'Здравствуйте! Чем могу помочь?'),
   ];
 
   bool isAvailable = true;
@@ -134,6 +133,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      enabled: isAvailable,
                       controller: messageController,
                       keyboardType: TextInputType.multiline,
                       onSubmitted: (value) => sendUserMessage(),

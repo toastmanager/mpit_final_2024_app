@@ -36,6 +36,18 @@ class MainScreen extends StatelessWidget {
                       ),
                     ],
                   )
+                  : tabsRouter.activeIndex == 1
+                  ? AppBar(
+                    elevation: 0,
+                    scrolledUnderElevation: 0,
+                    actions: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.notifications_outlined),
+                      ),
+                    ],
+                  )
                   : null,
           body: SafeArea(child: child),
           bottomNavigationBar: BottomNavigationBar(
