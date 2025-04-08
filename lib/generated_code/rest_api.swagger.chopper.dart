@@ -146,33 +146,6 @@ final class _$RestApi extends RestApi {
   }
 
   @override
-  Future<Response<String>> _v1AiMessagePost({required SendMessageDto? body}) {
-    final Uri $url = Uri.parse('/v1/ai/message');
-    final $body = body;
-    final Request $request = Request(
-      'POST',
-      $url,
-      client.baseUrl,
-      body: $body,
-    );
-    return client.send<String, String>($request);
-  }
-
-  @override
-  Future<Response<String>> _v1AiEmbeddingPost(
-      {required CreateEmbeddingDto? body}) {
-    final Uri $url = Uri.parse('/v1/ai/embedding');
-    final $body = body;
-    final Request $request = Request(
-      'POST',
-      $url,
-      client.baseUrl,
-      body: $body,
-    );
-    return client.send<String, String>($request);
-  }
-
-  @override
   Future<Response<ArticleDto>> _v1ArticlesPost(
       {required CreateArticleDto? body}) {
     final Uri $url = Uri.parse('/v1/articles');
@@ -261,6 +234,39 @@ final class _$RestApi extends RestApi {
       client.baseUrl,
     );
     return client.send<List<ArticleDto>, ArticleDto>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> _v1ArticlesIdBannerPut({
+    required String? id,
+    String? file,
+  }) {
+    final Uri $url = Uri.parse('/v1/articles/${id}/banner');
+    final List<PartValue> $parts = <PartValue>[
+      PartValueFile<String?>(
+        'file',
+        file,
+      )
+    ];
+    final Request $request = Request(
+      'PUT',
+      $url,
+      client.baseUrl,
+      parts: $parts,
+      multipart: true,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> _v1ArticlesIdBannerDelete({required String? id}) {
+    final Uri $url = Uri.parse('/v1/articles/${id}/banner');
+    final Request $request = Request(
+      'DELETE',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
   }
 
   @override

@@ -540,102 +540,6 @@ extension $UpdateUserDtoExtension on UpdateUserDto {
 }
 
 @JsonSerializable(explicitToJson: true)
-class SendMessageDto {
-  const SendMessageDto({
-    required this.message,
-    this.history,
-  });
-
-  factory SendMessageDto.fromJson(Map<String, dynamic> json) =>
-      _$SendMessageDtoFromJson(json);
-
-  static const toJsonFactory = _$SendMessageDtoToJson;
-  Map<String, dynamic> toJson() => _$SendMessageDtoToJson(this);
-
-  @JsonKey(name: 'message')
-  final String message;
-  @JsonKey(name: 'history')
-  final String? history;
-  static const fromJsonFactory = _$SendMessageDtoFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is SendMessageDto &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality()
-                    .equals(other.message, message)) &&
-            (identical(other.history, history) ||
-                const DeepCollectionEquality().equals(other.history, history)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(history) ^
-      runtimeType.hashCode;
-}
-
-extension $SendMessageDtoExtension on SendMessageDto {
-  SendMessageDto copyWith({String? message, String? history}) {
-    return SendMessageDto(
-        message: message ?? this.message, history: history ?? this.history);
-  }
-
-  SendMessageDto copyWithWrapped(
-      {Wrapped<String>? message, Wrapped<String?>? history}) {
-    return SendMessageDto(
-        message: (message != null ? message.value : this.message),
-        history: (history != null ? history.value : this.history));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateEmbeddingDto {
-  const CreateEmbeddingDto({
-    required this.text,
-  });
-
-  factory CreateEmbeddingDto.fromJson(Map<String, dynamic> json) =>
-      _$CreateEmbeddingDtoFromJson(json);
-
-  static const toJsonFactory = _$CreateEmbeddingDtoToJson;
-  Map<String, dynamic> toJson() => _$CreateEmbeddingDtoToJson(this);
-
-  @JsonKey(name: 'text')
-  final String text;
-  static const fromJsonFactory = _$CreateEmbeddingDtoFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is CreateEmbeddingDto &&
-            (identical(other.text, text) ||
-                const DeepCollectionEquality().equals(other.text, text)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(text) ^ runtimeType.hashCode;
-}
-
-extension $CreateEmbeddingDtoExtension on CreateEmbeddingDto {
-  CreateEmbeddingDto copyWith({String? text}) {
-    return CreateEmbeddingDto(text: text ?? this.text);
-  }
-
-  CreateEmbeddingDto copyWithWrapped({Wrapped<String>? text}) {
-    return CreateEmbeddingDto(text: (text != null ? text.value : this.text));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class CreateArticleDto {
   const CreateArticleDto({
     required this.title,
@@ -697,6 +601,7 @@ class ArticleDto {
     required this.text,
     this.bannerUrl,
     required this.author,
+    required this.views,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -719,6 +624,8 @@ class ArticleDto {
   final String? bannerUrl;
   @JsonKey(name: 'author')
   final UserDto author;
+  @JsonKey(name: 'views')
+  final int views;
   @JsonKey(name: 'createdAt')
   final DateTime createdAt;
   @JsonKey(name: 'updatedAt')
@@ -742,6 +649,8 @@ class ArticleDto {
                     .equals(other.bannerUrl, bannerUrl)) &&
             (identical(other.author, author) ||
                 const DeepCollectionEquality().equals(other.author, author)) &&
+            (identical(other.views, views) ||
+                const DeepCollectionEquality().equals(other.views, views)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -761,6 +670,7 @@ class ArticleDto {
       const DeepCollectionEquality().hash(text) ^
       const DeepCollectionEquality().hash(bannerUrl) ^
       const DeepCollectionEquality().hash(author) ^
+      const DeepCollectionEquality().hash(views) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       runtimeType.hashCode;
@@ -774,6 +684,7 @@ extension $ArticleDtoExtension on ArticleDto {
       String? text,
       String? bannerUrl,
       UserDto? author,
+      int? views,
       DateTime? createdAt,
       DateTime? updatedAt}) {
     return ArticleDto(
@@ -783,6 +694,7 @@ extension $ArticleDtoExtension on ArticleDto {
         text: text ?? this.text,
         bannerUrl: bannerUrl ?? this.bannerUrl,
         author: author ?? this.author,
+        views: views ?? this.views,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt);
   }
@@ -794,6 +706,7 @@ extension $ArticleDtoExtension on ArticleDto {
       Wrapped<String>? text,
       Wrapped<String?>? bannerUrl,
       Wrapped<UserDto>? author,
+      Wrapped<int>? views,
       Wrapped<DateTime>? createdAt,
       Wrapped<DateTime>? updatedAt}) {
     return ArticleDto(
@@ -803,6 +716,7 @@ extension $ArticleDtoExtension on ArticleDto {
         text: (text != null ? text.value : this.text),
         bannerUrl: (bannerUrl != null ? bannerUrl.value : this.bannerUrl),
         author: (author != null ? author.value : this.author),
+        views: (views != null ? views.value : this.views),
         createdAt: (createdAt != null ? createdAt.value : this.createdAt),
         updatedAt: (updatedAt != null ? updatedAt.value : this.updatedAt));
   }
@@ -1746,6 +1660,52 @@ extension $CreateContactDtoExtension on CreateContactDto {
     return CreateContactDto(
         contact: (contact != null ? contact.value : this.contact),
         type: (type != null ? type.value : this.type));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class V1ArticlesIdBannerPut$RequestBody {
+  const V1ArticlesIdBannerPut$RequestBody({
+    this.file,
+  });
+
+  factory V1ArticlesIdBannerPut$RequestBody.fromJson(
+          Map<String, dynamic> json) =>
+      _$V1ArticlesIdBannerPut$RequestBodyFromJson(json);
+
+  static const toJsonFactory = _$V1ArticlesIdBannerPut$RequestBodyToJson;
+  Map<String, dynamic> toJson() =>
+      _$V1ArticlesIdBannerPut$RequestBodyToJson(this);
+
+  @JsonKey(name: 'file')
+  final String? file;
+  static const fromJsonFactory = _$V1ArticlesIdBannerPut$RequestBodyFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is V1ArticlesIdBannerPut$RequestBody &&
+            (identical(other.file, file) ||
+                const DeepCollectionEquality().equals(other.file, file)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(file) ^ runtimeType.hashCode;
+}
+
+extension $V1ArticlesIdBannerPut$RequestBodyExtension
+    on V1ArticlesIdBannerPut$RequestBody {
+  V1ArticlesIdBannerPut$RequestBody copyWith({String? file}) {
+    return V1ArticlesIdBannerPut$RequestBody(file: file ?? this.file);
+  }
+
+  V1ArticlesIdBannerPut$RequestBody copyWithWrapped({Wrapped<String?>? file}) {
+    return V1ArticlesIdBannerPut$RequestBody(
+        file: (file != null ? file.value : this.file));
   }
 }
 

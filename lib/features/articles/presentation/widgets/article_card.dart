@@ -110,7 +110,7 @@ class ArticleCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 2),
                                 Text(
-                                  '52 ⋅ ${AppDateUtils().timeAgo(article.createdAt)}',
+                                  '${article.views} ⋅ ${AppDateUtils().timeAgo(article.createdAt)}',
                                   style: fonts.bodySmall?.copyWith(
                                     color: colors.onSurfaceVariant,
                                   ),

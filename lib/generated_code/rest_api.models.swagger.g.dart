@@ -114,28 +114,6 @@ Map<String, dynamic> _$UpdateUserDtoToJson(UpdateUserDto instance) =>
       'tel': instance.tel,
     };
 
-SendMessageDto _$SendMessageDtoFromJson(Map<String, dynamic> json) =>
-    SendMessageDto(
-      message: json['message'] as String,
-      history: json['history'] as String?,
-    );
-
-Map<String, dynamic> _$SendMessageDtoToJson(SendMessageDto instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'history': instance.history,
-    };
-
-CreateEmbeddingDto _$CreateEmbeddingDtoFromJson(Map<String, dynamic> json) =>
-    CreateEmbeddingDto(
-      text: json['text'] as String,
-    );
-
-Map<String, dynamic> _$CreateEmbeddingDtoToJson(CreateEmbeddingDto instance) =>
-    <String, dynamic>{
-      'text': instance.text,
-    };
-
 CreateArticleDto _$CreateArticleDtoFromJson(Map<String, dynamic> json) =>
     CreateArticleDto(
       title: json['title'] as String,
@@ -155,6 +133,7 @@ ArticleDto _$ArticleDtoFromJson(Map<String, dynamic> json) => ArticleDto(
       text: json['text'] as String,
       bannerUrl: json['bannerUrl'] as String?,
       author: UserDto.fromJson(json['author'] as Map<String, dynamic>),
+      views: (json['views'] as num).toInt(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -167,6 +146,7 @@ Map<String, dynamic> _$ArticleDtoToJson(ArticleDto instance) =>
       'text': instance.text,
       'bannerUrl': instance.bannerUrl,
       'author': instance.author.toJson(),
+      'views': instance.views,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
@@ -378,4 +358,16 @@ Map<String, dynamic> _$CreateContactDtoToJson(CreateContactDto instance) =>
     <String, dynamic>{
       'contact': instance.contact,
       'type': instance.type,
+    };
+
+V1ArticlesIdBannerPut$RequestBody _$V1ArticlesIdBannerPut$RequestBodyFromJson(
+        Map<String, dynamic> json) =>
+    V1ArticlesIdBannerPut$RequestBody(
+      file: json['file'] as String?,
+    );
+
+Map<String, dynamic> _$V1ArticlesIdBannerPut$RequestBodyToJson(
+        V1ArticlesIdBannerPut$RequestBody instance) =>
+    <String, dynamic>{
+      'file': instance.file,
     };
