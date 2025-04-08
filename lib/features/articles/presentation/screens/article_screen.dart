@@ -41,6 +41,7 @@ class ArticleScreen extends StatelessWidget {
                           children: [
                             CachedNetworkImage(
                               imageUrl: article.bannerUrl ?? '',
+                              fit: BoxFit.cover,
                               errorWidget:
                                   (context, url, error) => Placeholder(),
                               height:

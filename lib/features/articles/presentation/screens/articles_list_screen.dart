@@ -19,26 +19,33 @@ class ArticlesListScreen extends StatefulWidget {
 
 class _ArticlesListScreenState extends State<ArticlesListScreen> {
   final pages = [
-    FutureBuilder<List<ArticleDto>>(
-      future: sl<ArticlesRepository>().getArticles(),
-      builder: (context, snapshot) {
-        final articles = snapshot.data ?? [];
-        return ListView.separated(
-          itemBuilder:
-              (context, index) => InkWell(
-                onTap: () {
-                  sl<AppRouter>().push(
-                    ArticleRoute(articleId: articles[index].id.toInt()),
-                  );
-                },
-                child: ArticleCard(article: articles[index]),
+    StatefulBuilder(
+      builder: (context, setArticlesState) {
+        return FutureBuilder<List<ArticleDto>>(
+          future: sl<ArticlesRepository>().getArticles(),
+          builder: (context, snapshot) {
+            final articles = snapshot.data ?? [];
+            return RefreshIndicator(
+              onRefresh: () async => setArticlesState(() {}),
+              child: ListView.separated(
+                itemBuilder:
+                    (context, index) => InkWell(
+                      onTap: () {
+                        sl<AppRouter>().push(
+                          ArticleRoute(articleId: articles[index].id.toInt()),
+                        );
+                      },
+                      child: ArticleCard(article: articles[index]),
+                    ),
+                separatorBuilder:
+                    (context, index) => const SizedBox(height: 16),
+                itemCount: articles.length,
               ),
-          separatorBuilder: (context, index) => const SizedBox(height: 16),
-          itemCount: articles.length,
+            );
+          },
         );
       },
     ),
-    Placeholder(),
     Placeholder(),
     Placeholder(),
   ];
@@ -73,15 +80,8 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
                     ReferencesTabButton(
                       pageIndex: 0,
                       currentIndex: pageIndex,
-                      text: 'Рекомендации',
+                      text: 'Новые',
                       onTap: () => setState(() => pageIndex = 0),
-                    ),
-                    const SizedBox(width: 8),
-                    ReferencesTabButton(
-                      pageIndex: 1,
-                      currentIndex: pageIndex,
-                      text: 'В тренде',
-                      onTap: () => setState(() => pageIndex = 1),
                     ),
                     const SizedBox(width: 8),
                     ReferencesTabButton(

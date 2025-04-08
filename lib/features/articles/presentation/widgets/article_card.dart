@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
-import 'package:mpit_final_2024_app/core/extensions/extensions.dart';
 import 'package:mpit_final_2024_app/core/constants/icon_paths.dart';
 import 'package:mpit_final_2024_app/core/utils/app_date_utils.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.swagger.dart';
