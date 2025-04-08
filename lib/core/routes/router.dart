@@ -14,11 +14,12 @@ class AppRouter extends RootStackRouter {
       children: [
         AutoRoute(path: 'profile', page: ProfileRoute.page),
         AutoRoute(path: 'help-requests', page: HelpRequestsRoute.page),
-        AutoRoute(path: 'chatbot', page: ChatbotRoute.page),
-        AutoRoute(path: 'references', page: ReferencesRoute.page),
-        AutoRoute(path: 'vacancies', page: VacanciesRoute.page),
+        AutoRoute(path: 'articles-list', page: ArticlesListRoute.page),
+        AutoRoute(path: '_', page: EmptyRoute.page),
       ],
     ),
+    AutoRoute(path: '/chatbot', page: ChatbotRoute.page),
+    AutoRoute(path: '/help-request/:uuid', page: HelpRequestRoute.page),
     AutoRoute(path: '/articles/:articleId', page: ArticleRoute.page),
   ];
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
 import 'package:mpit_final_2024_app/core/constants/icon_paths.dart';
+import 'package:mpit_final_2024_app/core/utils/app_date_utils.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.swagger.dart';
 
 class ArticleCard extends StatelessWidget {
@@ -13,7 +14,7 @@ class ArticleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const readRate = 238;
+    const wordsReadRate = 140;
     final fonts = TextTheme.of(context);
     final colors = ColorScheme.of(context);
 
@@ -63,7 +64,7 @@ class ArticleCard extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                '${article.text.length ~/ readRate} минут',
+                                '${article.text.trim().split(' ').length ~/ wordsReadRate} минут',
                                 style: fonts.bodySmall?.copyWith(
                                   color: Colors.white,
                                 ),
@@ -109,7 +110,7 @@ class ArticleCard extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 2),
                                 Text(
-                                  '52 ⋅ 3 месяца назад',
+                                  '${article.views} ⋅ ${AppDateUtils().timeAgo(article.createdAt)}',
                                   style: fonts.bodySmall?.copyWith(
                                     color: colors.onSurfaceVariant,
                                   ),

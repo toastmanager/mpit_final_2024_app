@@ -4,6 +4,7 @@ class IconPaths {
   static const bookmarkPlusLine = 'assets/icons/bookmark-plus-line.svg';
   static const briefcaseLine = 'assets/icons/briefcase-line.svg';
   static const briefcaseLineFilled = 'assets/icons/briefcase-line-filled.svg';
+  static const chatbotAvatar = 'assets/icons/chatbot-avatar.svg';
   static const checkboxListDetailLine =
       'assets/icons/checkbox-list-detail-line.svg';
   static const checkboxListDetailLineFilled =

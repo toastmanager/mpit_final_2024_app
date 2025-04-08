@@ -200,34 +200,6 @@ abstract class RestApi extends ChopperService {
       {@Path('id') required String? id});
 
   ///
-  Future<chopper.Response<String>> v1AiMessagePost(
-      {required SendMessageDto? body}) {
-    return _v1AiMessagePost(body: body);
-  }
-
-  ///
-  @Post(
-    path: '/v1/ai/message',
-    optionalBody: true,
-  )
-  Future<chopper.Response<String>> _v1AiMessagePost(
-      {@Body() required SendMessageDto? body});
-
-  ///
-  Future<chopper.Response<String>> v1AiEmbeddingPost(
-      {required CreateEmbeddingDto? body}) {
-    return _v1AiEmbeddingPost(body: body);
-  }
-
-  ///
-  @Post(
-    path: '/v1/ai/embedding',
-    optionalBody: true,
-  )
-  Future<chopper.Response<String>> _v1AiEmbeddingPost(
-      {@Body() required CreateEmbeddingDto? body});
-
-  ///
   Future<chopper.Response<ArticleDto>> v1ArticlesPost(
       {required CreateArticleDto? body}) {
     generatedMapping.putIfAbsent(ArticleDto, () => ArticleDto.fromJsonFactory);
@@ -307,16 +279,20 @@ abstract class RestApi extends ChopperService {
 
   ///
   ///@param query
-  Future<chopper.Response<String>> v1ArticlesChatbotQueryGet(
-      {required String? query}) {
-    return _v1ArticlesChatbotQueryGet(query: query);
+  Future<chopper.Response<String>> v1ArticlesChatbotQueryGet({
+    required String? query,
+    required AskArticlesChatbotDto? body,
+  }) {
+    return _v1ArticlesChatbotQueryGet(query: query, body: body);
   }
 
   ///
   ///@param query
   @Get(path: '/v1/articles/chatbot/{query}')
-  Future<chopper.Response<String>> _v1ArticlesChatbotQueryGet(
-      {@Path('query') required String? query});
+  Future<chopper.Response<String>> _v1ArticlesChatbotQueryGet({
+    @Path('query') required String? query,
+    @Body() required AskArticlesChatbotDto? body,
+  });
 
   ///
   ///@param query
@@ -332,6 +308,39 @@ abstract class RestApi extends ChopperService {
   @Get(path: '/v1/articles/meaning-search/{query}')
   Future<chopper.Response<List<ArticleDto>>> _v1ArticlesMeaningSearchQueryGet(
       {@Path('query') required String? query});
+
+  ///
+  ///@param id
+  Future<chopper.Response> v1ArticlesIdBannerPut({
+    required String? id,
+    String? file,
+  }) {
+    return _v1ArticlesIdBannerPut(id: id, file: file);
+  }
+
+  ///
+  ///@param id
+  @Put(
+    path: '/v1/articles/{id}/banner',
+    optionalBody: true,
+  )
+  @Multipart()
+  Future<chopper.Response> _v1ArticlesIdBannerPut({
+    @Path('id') required String? id,
+    @PartFile() String? file,
+  });
+
+  ///
+  ///@param id
+  Future<chopper.Response> v1ArticlesIdBannerDelete({required String? id}) {
+    return _v1ArticlesIdBannerDelete(id: id);
+  }
+
+  ///
+  ///@param id
+  @Delete(path: '/v1/articles/{id}/banner')
+  Future<chopper.Response> _v1ArticlesIdBannerDelete(
+      {@Path('id') required String? id});
 
   ///
   Future<chopper.Response<HelpRequestDto>> v1HelpRequestsPost(

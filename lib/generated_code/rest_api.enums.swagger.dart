@@ -77,14 +77,10 @@ enum HelpRequestDtoStatus {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
 
-  @JsonValue('ON_CONSIDERATION')
-  onConsideration('ON_CONSIDERATION'),
-  @JsonValue('APPROVED')
-  approved('APPROVED'),
+  @JsonValue('CREATED')
+  created('CREATED'),
   @JsonValue('VOLUNTEER_FOUND')
   volunteerFound('VOLUNTEER_FOUND'),
-  @JsonValue('IN_PROGRESS')
-  inProgress('IN_PROGRESS'),
   @JsonValue('FINISHED')
   finished('FINISHED'),
   @JsonValue('CANCELED')
@@ -125,14 +121,10 @@ enum UpdateHelpRequetStatusDtoStatus {
   @JsonValue(null)
   swaggerGeneratedUnknown(null),
 
-  @JsonValue('ON_CONSIDERATION')
-  onConsideration('ON_CONSIDERATION'),
-  @JsonValue('APPROVED')
-  approved('APPROVED'),
+  @JsonValue('CREATED')
+  created('CREATED'),
   @JsonValue('VOLUNTEER_FOUND')
   volunteerFound('VOLUNTEER_FOUND'),
-  @JsonValue('IN_PROGRESS')
-  inProgress('IN_PROGRESS'),
   @JsonValue('FINISHED')
   finished('FINISHED'),
   @JsonValue('CANCELED')

@@ -540,91 +540,6 @@ extension $UpdateUserDtoExtension on UpdateUserDto {
 }
 
 @JsonSerializable(explicitToJson: true)
-class SendMessageDto {
-  const SendMessageDto({
-    required this.message,
-  });
-
-  factory SendMessageDto.fromJson(Map<String, dynamic> json) =>
-      _$SendMessageDtoFromJson(json);
-
-  static const toJsonFactory = _$SendMessageDtoToJson;
-  Map<String, dynamic> toJson() => _$SendMessageDtoToJson(this);
-
-  @JsonKey(name: 'message')
-  final String message;
-  static const fromJsonFactory = _$SendMessageDtoFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is SendMessageDto &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(message) ^ runtimeType.hashCode;
-}
-
-extension $SendMessageDtoExtension on SendMessageDto {
-  SendMessageDto copyWith({String? message}) {
-    return SendMessageDto(message: message ?? this.message);
-  }
-
-  SendMessageDto copyWithWrapped({Wrapped<String>? message}) {
-    return SendMessageDto(
-        message: (message != null ? message.value : this.message));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateEmbeddingDto {
-  const CreateEmbeddingDto({
-    required this.text,
-  });
-
-  factory CreateEmbeddingDto.fromJson(Map<String, dynamic> json) =>
-      _$CreateEmbeddingDtoFromJson(json);
-
-  static const toJsonFactory = _$CreateEmbeddingDtoToJson;
-  Map<String, dynamic> toJson() => _$CreateEmbeddingDtoToJson(this);
-
-  @JsonKey(name: 'text')
-  final String text;
-  static const fromJsonFactory = _$CreateEmbeddingDtoFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is CreateEmbeddingDto &&
-            (identical(other.text, text) ||
-                const DeepCollectionEquality().equals(other.text, text)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(text) ^ runtimeType.hashCode;
-}
-
-extension $CreateEmbeddingDtoExtension on CreateEmbeddingDto {
-  CreateEmbeddingDto copyWith({String? text}) {
-    return CreateEmbeddingDto(text: text ?? this.text);
-  }
-
-  CreateEmbeddingDto copyWithWrapped({Wrapped<String>? text}) {
-    return CreateEmbeddingDto(text: (text != null ? text.value : this.text));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class CreateArticleDto {
   const CreateArticleDto({
     required this.title,
@@ -686,6 +601,7 @@ class ArticleDto {
     required this.text,
     this.bannerUrl,
     required this.author,
+    required this.views,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -708,6 +624,8 @@ class ArticleDto {
   final String? bannerUrl;
   @JsonKey(name: 'author')
   final UserDto author;
+  @JsonKey(name: 'views')
+  final int views;
   @JsonKey(name: 'createdAt')
   final DateTime createdAt;
   @JsonKey(name: 'updatedAt')
@@ -731,6 +649,8 @@ class ArticleDto {
                     .equals(other.bannerUrl, bannerUrl)) &&
             (identical(other.author, author) ||
                 const DeepCollectionEquality().equals(other.author, author)) &&
+            (identical(other.views, views) ||
+                const DeepCollectionEquality().equals(other.views, views)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -750,6 +670,7 @@ class ArticleDto {
       const DeepCollectionEquality().hash(text) ^
       const DeepCollectionEquality().hash(bannerUrl) ^
       const DeepCollectionEquality().hash(author) ^
+      const DeepCollectionEquality().hash(views) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       runtimeType.hashCode;
@@ -763,6 +684,7 @@ extension $ArticleDtoExtension on ArticleDto {
       String? text,
       String? bannerUrl,
       UserDto? author,
+      int? views,
       DateTime? createdAt,
       DateTime? updatedAt}) {
     return ArticleDto(
@@ -772,6 +694,7 @@ extension $ArticleDtoExtension on ArticleDto {
         text: text ?? this.text,
         bannerUrl: bannerUrl ?? this.bannerUrl,
         author: author ?? this.author,
+        views: views ?? this.views,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt);
   }
@@ -783,6 +706,7 @@ extension $ArticleDtoExtension on ArticleDto {
       Wrapped<String>? text,
       Wrapped<String?>? bannerUrl,
       Wrapped<UserDto>? author,
+      Wrapped<int>? views,
       Wrapped<DateTime>? createdAt,
       Wrapped<DateTime>? updatedAt}) {
     return ArticleDto(
@@ -792,6 +716,7 @@ extension $ArticleDtoExtension on ArticleDto {
         text: (text != null ? text.value : this.text),
         bannerUrl: (bannerUrl != null ? bannerUrl.value : this.bannerUrl),
         author: (author != null ? author.value : this.author),
+        views: (views != null ? views.value : this.views),
         createdAt: (createdAt != null ? createdAt.value : this.createdAt),
         updatedAt: (updatedAt != null ? updatedAt.value : this.updatedAt));
   }
@@ -851,9 +776,53 @@ extension $UpdateArticleDtoExtension on UpdateArticleDto {
 }
 
 @JsonSerializable(explicitToJson: true)
+class AskArticlesChatbotDto {
+  const AskArticlesChatbotDto({
+    required this.history,
+  });
+
+  factory AskArticlesChatbotDto.fromJson(Map<String, dynamic> json) =>
+      _$AskArticlesChatbotDtoFromJson(json);
+
+  static const toJsonFactory = _$AskArticlesChatbotDtoToJson;
+  Map<String, dynamic> toJson() => _$AskArticlesChatbotDtoToJson(this);
+
+  @JsonKey(name: 'history')
+  final String history;
+  static const fromJsonFactory = _$AskArticlesChatbotDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AskArticlesChatbotDto &&
+            (identical(other.history, history) ||
+                const DeepCollectionEquality().equals(other.history, history)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(history) ^ runtimeType.hashCode;
+}
+
+extension $AskArticlesChatbotDtoExtension on AskArticlesChatbotDto {
+  AskArticlesChatbotDto copyWith({String? history}) {
+    return AskArticlesChatbotDto(history: history ?? this.history);
+  }
+
+  AskArticlesChatbotDto copyWithWrapped({Wrapped<String>? history}) {
+    return AskArticlesChatbotDto(
+        history: (history != null ? history.value : this.history));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class CreateHelpRequestDto {
   const CreateHelpRequestDto({
     required this.text,
+    required this.title,
     required this.type,
   });
 
@@ -865,6 +834,8 @@ class CreateHelpRequestDto {
 
   @JsonKey(name: 'text')
   final String text;
+  @JsonKey(name: 'title')
+  final String title;
   @JsonKey(
     name: 'type',
     toJson: createHelpRequestDtoTypeToJson,
@@ -879,6 +850,8 @@ class CreateHelpRequestDto {
         (other is CreateHelpRequestDto &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)));
   }
@@ -889,21 +862,27 @@ class CreateHelpRequestDto {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(text) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(type) ^
       runtimeType.hashCode;
 }
 
 extension $CreateHelpRequestDtoExtension on CreateHelpRequestDto {
   CreateHelpRequestDto copyWith(
-      {String? text, enums.CreateHelpRequestDtoType? type}) {
+      {String? text, String? title, enums.CreateHelpRequestDtoType? type}) {
     return CreateHelpRequestDto(
-        text: text ?? this.text, type: type ?? this.type);
+        text: text ?? this.text,
+        title: title ?? this.title,
+        type: type ?? this.type);
   }
 
   CreateHelpRequestDto copyWithWrapped(
-      {Wrapped<String>? text, Wrapped<enums.CreateHelpRequestDtoType>? type}) {
+      {Wrapped<String>? text,
+      Wrapped<String>? title,
+      Wrapped<enums.CreateHelpRequestDtoType>? type}) {
     return CreateHelpRequestDto(
         text: (text != null ? text.value : this.text),
+        title: (title != null ? title.value : this.title),
         type: (type != null ? type.value : this.type));
   }
 }
@@ -912,6 +891,7 @@ extension $CreateHelpRequestDtoExtension on CreateHelpRequestDto {
 class HelpRequestDto {
   const HelpRequestDto({
     required this.uuid,
+    required this.title,
     required this.text,
     required this.requesterId,
     this.volunteerId,
@@ -929,6 +909,8 @@ class HelpRequestDto {
 
   @JsonKey(name: 'uuid')
   final String uuid;
+  @JsonKey(name: 'title')
+  final String title;
   @JsonKey(name: 'text')
   final String text;
   @JsonKey(name: 'requesterId')
@@ -959,6 +941,8 @@ class HelpRequestDto {
         (other is HelpRequestDto &&
             (identical(other.uuid, uuid) ||
                 const DeepCollectionEquality().equals(other.uuid, uuid)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
             (identical(other.requesterId, requesterId) ||
@@ -985,6 +969,7 @@ class HelpRequestDto {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(uuid) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(text) ^
       const DeepCollectionEquality().hash(requesterId) ^
       const DeepCollectionEquality().hash(volunteerId) ^
@@ -998,6 +983,7 @@ class HelpRequestDto {
 extension $HelpRequestDtoExtension on HelpRequestDto {
   HelpRequestDto copyWith(
       {String? uuid,
+      String? title,
       String? text,
       double? requesterId,
       double? volunteerId,
@@ -1007,6 +993,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
       DateTime? updatedAt}) {
     return HelpRequestDto(
         uuid: uuid ?? this.uuid,
+        title: title ?? this.title,
         text: text ?? this.text,
         requesterId: requesterId ?? this.requesterId,
         volunteerId: volunteerId ?? this.volunteerId,
@@ -1018,6 +1005,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
 
   HelpRequestDto copyWithWrapped(
       {Wrapped<String>? uuid,
+      Wrapped<String>? title,
       Wrapped<String>? text,
       Wrapped<double>? requesterId,
       Wrapped<double?>? volunteerId,
@@ -1027,6 +1015,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
       Wrapped<DateTime>? updatedAt}) {
     return HelpRequestDto(
         uuid: (uuid != null ? uuid.value : this.uuid),
+        title: (title != null ? title.value : this.title),
         text: (text != null ? text.value : this.text),
         requesterId:
             (requesterId != null ? requesterId.value : this.requesterId),
@@ -1043,6 +1032,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
 class UpdateHelpRequestDto {
   const UpdateHelpRequestDto({
     this.text,
+    this.title,
     this.type,
   });
 
@@ -1054,6 +1044,8 @@ class UpdateHelpRequestDto {
 
   @JsonKey(name: 'text')
   final String? text;
+  @JsonKey(name: 'title')
+  final String? title;
   @JsonKey(
     name: 'type',
     toJson: updateHelpRequestDtoTypeNullableToJson,
@@ -1068,6 +1060,8 @@ class UpdateHelpRequestDto {
         (other is UpdateHelpRequestDto &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)));
   }
@@ -1078,22 +1072,27 @@ class UpdateHelpRequestDto {
   @override
   int get hashCode =>
       const DeepCollectionEquality().hash(text) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(type) ^
       runtimeType.hashCode;
 }
 
 extension $UpdateHelpRequestDtoExtension on UpdateHelpRequestDto {
   UpdateHelpRequestDto copyWith(
-      {String? text, enums.UpdateHelpRequestDtoType? type}) {
+      {String? text, String? title, enums.UpdateHelpRequestDtoType? type}) {
     return UpdateHelpRequestDto(
-        text: text ?? this.text, type: type ?? this.type);
+        text: text ?? this.text,
+        title: title ?? this.title,
+        type: type ?? this.type);
   }
 
   UpdateHelpRequestDto copyWithWrapped(
       {Wrapped<String?>? text,
+      Wrapped<String?>? title,
       Wrapped<enums.UpdateHelpRequestDtoType?>? type}) {
     return UpdateHelpRequestDto(
         text: (text != null ? text.value : this.text),
+        title: (title != null ? title.value : this.title),
         type: (type != null ? type.value : this.type));
   }
 }
@@ -1692,6 +1691,52 @@ extension $CreateContactDtoExtension on CreateContactDto {
     return CreateContactDto(
         contact: (contact != null ? contact.value : this.contact),
         type: (type != null ? type.value : this.type));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class V1ArticlesIdBannerPut$RequestBody {
+  const V1ArticlesIdBannerPut$RequestBody({
+    this.file,
+  });
+
+  factory V1ArticlesIdBannerPut$RequestBody.fromJson(
+          Map<String, dynamic> json) =>
+      _$V1ArticlesIdBannerPut$RequestBodyFromJson(json);
+
+  static const toJsonFactory = _$V1ArticlesIdBannerPut$RequestBodyToJson;
+  Map<String, dynamic> toJson() =>
+      _$V1ArticlesIdBannerPut$RequestBodyToJson(this);
+
+  @JsonKey(name: 'file')
+  final String? file;
+  static const fromJsonFactory = _$V1ArticlesIdBannerPut$RequestBodyFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is V1ArticlesIdBannerPut$RequestBody &&
+            (identical(other.file, file) ||
+                const DeepCollectionEquality().equals(other.file, file)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(file) ^ runtimeType.hashCode;
+}
+
+extension $V1ArticlesIdBannerPut$RequestBodyExtension
+    on V1ArticlesIdBannerPut$RequestBody {
+  V1ArticlesIdBannerPut$RequestBody copyWith({String? file}) {
+    return V1ArticlesIdBannerPut$RequestBody(file: file ?? this.file);
+  }
+
+  V1ArticlesIdBannerPut$RequestBody copyWithWrapped({Wrapped<String?>? file}) {
+    return V1ArticlesIdBannerPut$RequestBody(
+        file: (file != null ? file.value : this.file));
   }
 }
 
