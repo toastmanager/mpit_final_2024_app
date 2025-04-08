@@ -8,30 +8,32 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 import 'package:mpit_final_2024_app/empty_screen.dart' as _i4;
 import 'package:mpit_final_2024_app/features/articles/presentation/screens/article_screen.dart'
     as _i1;
 import 'package:mpit_final_2024_app/features/articles/presentation/screens/articles_list_screen.dart'
     as _i2;
 import 'package:mpit_final_2024_app/features/auth/presentation/screens/profile_screen.dart'
-    as _i8;
+    as _i9;
 import 'package:mpit_final_2024_app/features/chatbot/presentation/screens/chatbot_screen.dart'
     as _i3;
 import 'package:mpit_final_2024_app/features/help_requests/presentation/screens/help_request_screen.dart'
-    as _i5;
-import 'package:mpit_final_2024_app/features/help_requests/presentation/screens/help_requests_screen.dart'
     as _i6;
-import 'package:mpit_final_2024_app/main_screen.dart' as _i7;
+import 'package:mpit_final_2024_app/features/help_requests/presentation/screens/help_requests_screen.dart'
+    as _i7;
+import 'package:mpit_final_2024_app/features/main_screen/presentation/screens/home_screen.dart'
+    as _i8;
+import 'package:mpit_final_2024_app/global_screen.dart' as _i5;
 
 /// generated route for
 /// [_i1.ArticleScreen]
-class ArticleRoute extends _i9.PageRouteInfo<ArticleRouteArgs> {
+class ArticleRoute extends _i10.PageRouteInfo<ArticleRouteArgs> {
   ArticleRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required int articleId,
-    List<_i9.PageRouteInfo>? children,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           ArticleRoute.name,
           args: ArticleRouteArgs(
@@ -43,7 +45,7 @@ class ArticleRoute extends _i9.PageRouteInfo<ArticleRouteArgs> {
 
   static const String name = 'ArticleRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ArticleRouteArgs>();
@@ -61,7 +63,7 @@ class ArticleRouteArgs {
     required this.articleId,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final int articleId;
 
@@ -73,8 +75,8 @@ class ArticleRouteArgs {
 
 /// generated route for
 /// [_i2.ArticlesListScreen]
-class ArticlesListRoute extends _i9.PageRouteInfo<void> {
-  const ArticlesListRoute({List<_i9.PageRouteInfo>? children})
+class ArticlesListRoute extends _i10.PageRouteInfo<void> {
+  const ArticlesListRoute({List<_i10.PageRouteInfo>? children})
       : super(
           ArticlesListRoute.name,
           initialChildren: children,
@@ -82,7 +84,7 @@ class ArticlesListRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'ArticlesListRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i2.ArticlesListScreen();
@@ -92,27 +94,55 @@ class ArticlesListRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ChatbotScreen]
-class ChatbotRoute extends _i9.PageRouteInfo<void> {
-  const ChatbotRoute({List<_i9.PageRouteInfo>? children})
-      : super(
+class ChatbotRoute extends _i10.PageRouteInfo<ChatbotRouteArgs> {
+  ChatbotRoute({
+    _i11.Key? key,
+    String? initialQuery,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
           ChatbotRoute.name,
+          args: ChatbotRouteArgs(
+            key: key,
+            initialQuery: initialQuery,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ChatbotRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i3.ChatbotScreen();
+      final args =
+          data.argsAs<ChatbotRouteArgs>(orElse: () => const ChatbotRouteArgs());
+      return _i3.ChatbotScreen(
+        key: args.key,
+        initialQuery: args.initialQuery,
+      );
     },
   );
 }
 
+class ChatbotRouteArgs {
+  const ChatbotRouteArgs({
+    this.key,
+    this.initialQuery,
+  });
+
+  final _i11.Key? key;
+
+  final String? initialQuery;
+
+  @override
+  String toString() {
+    return 'ChatbotRouteArgs{key: $key, initialQuery: $initialQuery}';
+  }
+}
+
 /// generated route for
 /// [_i4.EmptyScreen]
-class EmptyRoute extends _i9.PageRouteInfo<void> {
-  const EmptyRoute({List<_i9.PageRouteInfo>? children})
+class EmptyRoute extends _i10.PageRouteInfo<void> {
+  const EmptyRoute({List<_i10.PageRouteInfo>? children})
       : super(
           EmptyRoute.name,
           initialChildren: children,
@@ -120,7 +150,7 @@ class EmptyRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'EmptyRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       return const _i4.EmptyScreen();
@@ -129,12 +159,31 @@ class EmptyRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.HelpRequestScreen]
-class HelpRequestRoute extends _i9.PageRouteInfo<HelpRequestRouteArgs> {
+/// [_i5.GlobalScreen]
+class GlobalRoute extends _i10.PageRouteInfo<void> {
+  const GlobalRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          GlobalRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'GlobalRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i5.GlobalScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i6.HelpRequestScreen]
+class HelpRequestRoute extends _i10.PageRouteInfo<HelpRequestRouteArgs> {
   HelpRequestRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required String uuid,
-    List<_i9.PageRouteInfo>? children,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           HelpRequestRoute.name,
           args: HelpRequestRouteArgs(
@@ -146,11 +195,11 @@ class HelpRequestRoute extends _i9.PageRouteInfo<HelpRequestRouteArgs> {
 
   static const String name = 'HelpRequestRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<HelpRequestRouteArgs>();
-      return _i5.HelpRequestScreen(
+      return _i6.HelpRequestScreen(
         key: args.key,
         uuid: args.uuid,
       );
@@ -164,7 +213,7 @@ class HelpRequestRouteArgs {
     required this.uuid,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final String uuid;
 
@@ -175,9 +224,9 @@ class HelpRequestRouteArgs {
 }
 
 /// generated route for
-/// [_i6.HelpRequestsScreen]
-class HelpRequestsRoute extends _i9.PageRouteInfo<void> {
-  const HelpRequestsRoute({List<_i9.PageRouteInfo>? children})
+/// [_i7.HelpRequestsScreen]
+class HelpRequestsRoute extends _i10.PageRouteInfo<void> {
+  const HelpRequestsRoute({List<_i10.PageRouteInfo>? children})
       : super(
           HelpRequestsRoute.name,
           initialChildren: children,
@@ -185,37 +234,37 @@ class HelpRequestsRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'HelpRequestsRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i6.HelpRequestsScreen();
+      return const _i7.HelpRequestsScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i7.MainScreen]
-class MainRoute extends _i9.PageRouteInfo<void> {
-  const MainRoute({List<_i9.PageRouteInfo>? children})
+/// [_i8.HomeScreen]
+class HomeRoute extends _i10.PageRouteInfo<void> {
+  const HomeRoute({List<_i10.PageRouteInfo>? children})
       : super(
-          MainRoute.name,
+          HomeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MainRoute';
+  static const String name = 'HomeRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i7.MainScreen();
+      return const _i8.HomeScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i8.ProfileScreen]
-class ProfileRoute extends _i9.PageRouteInfo<void> {
-  const ProfileRoute({List<_i9.PageRouteInfo>? children})
+/// [_i9.ProfileScreen]
+class ProfileRoute extends _i10.PageRouteInfo<void> {
+  const ProfileRoute({List<_i10.PageRouteInfo>? children})
       : super(
           ProfileRoute.name,
           initialChildren: children,
@@ -223,10 +272,10 @@ class ProfileRoute extends _i9.PageRouteInfo<void> {
 
   static const String name = 'ProfileRoute';
 
-  static _i9.PageInfo page = _i9.PageInfo(
+  static _i10.PageInfo page = _i10.PageInfo(
     name,
     builder: (data) {
-      return const _i8.ProfileScreen();
+      return const _i9.ProfileScreen();
     },
   );
 }

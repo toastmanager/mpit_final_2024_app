@@ -7,14 +7,14 @@ import 'package:mpit_final_2024_app/core/routes/router.gr.dart';
 import 'package:mpit_final_2024_app/injection.dart';
 
 @RoutePage()
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class GlobalScreen extends StatelessWidget {
+  const GlobalScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: [
-        ProfileRoute(),
+        HomeRoute(),
         HelpRequestsRoute(),
         ArticlesListRoute(),
         EmptyRoute(),
