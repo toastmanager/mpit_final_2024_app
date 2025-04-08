@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:markdown_widget/markdown_widget.dart';
+import 'package:markdown_widget/widget/all.dart';
 import 'package:mpit_final_2024_app/core/constants/icon_paths.dart';
 import 'package:mpit_final_2024_app/features/chatbot/domain/enitites/chatbot_message.dart';
 import 'package:mpit_final_2024_app/features/chatbot/domain/repositories/chatbot_repository.dart';
@@ -103,15 +105,18 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                             topRight: Radius.circular(18),
                           ),
                         ),
-                        child: Text(
-                          messages[index].message,
-                          style: fonts.bodyMedium?.copyWith(
-                            color:
-                                messages[index].isUser
-                                    ? colors.onPrimary
-                                    : colors.onSurface,
-                          ),
-                        ),
+                        child:
+                            messages[index].isUser
+                                ? Text(
+                                  messages[index].message,
+                                  style: fonts.bodyMedium?.copyWith(
+                                    color:
+                                        messages[index].isUser
+                                            ? colors.onPrimary
+                                            : colors.onSurface,
+                                  ),
+                                )
+                                : MarkdownBlock(data: messages[index].message),
                       ),
                     ),
                 separatorBuilder: (context, index) => const SizedBox(height: 8),
