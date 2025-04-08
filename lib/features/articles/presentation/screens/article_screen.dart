@@ -24,7 +24,7 @@ class ArticleScreen extends StatelessWidget {
     final fonts = TextTheme.of(context);
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder<ArticleDto>(
+        child: FutureBuilder<ArticleDto?>(
           future: sl<ArticlesRepository>().getArticle(id: articleId),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {

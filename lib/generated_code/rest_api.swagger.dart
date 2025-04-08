@@ -307,16 +307,20 @@ abstract class RestApi extends ChopperService {
 
   ///
   ///@param query
-  Future<chopper.Response<String>> v1ArticlesChatbotQueryGet(
-      {required String? query}) {
-    return _v1ArticlesChatbotQueryGet(query: query);
+  Future<chopper.Response<String>> v1ArticlesChatbotQueryGet({
+    required String? query,
+    required AskArticlesChatbotDto? body,
+  }) {
+    return _v1ArticlesChatbotQueryGet(query: query, body: body);
   }
 
   ///
   ///@param query
   @Get(path: '/v1/articles/chatbot/{query}')
-  Future<chopper.Response<String>> _v1ArticlesChatbotQueryGet(
-      {@Path('query') required String? query});
+  Future<chopper.Response<String>> _v1ArticlesChatbotQueryGet({
+    @Path('query') required String? query,
+    @Body() required AskArticlesChatbotDto? body,
+  });
 
   ///
   ///@param query

@@ -117,11 +117,13 @@ Map<String, dynamic> _$UpdateUserDtoToJson(UpdateUserDto instance) =>
 SendMessageDto _$SendMessageDtoFromJson(Map<String, dynamic> json) =>
     SendMessageDto(
       message: json['message'] as String,
+      history: json['history'] as String?,
     );
 
 Map<String, dynamic> _$SendMessageDtoToJson(SendMessageDto instance) =>
     <String, dynamic>{
       'message': instance.message,
+      'history': instance.history,
     };
 
 CreateEmbeddingDto _$CreateEmbeddingDtoFromJson(Map<String, dynamic> json) =>
@@ -179,6 +181,18 @@ Map<String, dynamic> _$UpdateArticleDtoToJson(UpdateArticleDto instance) =>
     <String, dynamic>{
       'title': instance.title,
       'text': instance.text,
+    };
+
+AskArticlesChatbotDto _$AskArticlesChatbotDtoFromJson(
+        Map<String, dynamic> json) =>
+    AskArticlesChatbotDto(
+      history: json['history'] as String,
+    );
+
+Map<String, dynamic> _$AskArticlesChatbotDtoToJson(
+        AskArticlesChatbotDto instance) =>
+    <String, dynamic>{
+      'history': instance.history,
     };
 
 CreateHelpRequestDto _$CreateHelpRequestDtoFromJson(

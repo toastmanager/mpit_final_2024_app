@@ -1,54 +1,44 @@
-import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
 import 'package:mpit_final_2024_app/core/routes/router.dart';
 import 'package:mpit_final_2024_app/core/routes/router.gr.dart';
+import 'package:mpit_final_2024_app/features/articles/domain/repositories/articles_repository.dart';
 import 'package:mpit_final_2024_app/features/articles/presentation/widgets/article_card.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.swagger.dart';
 import 'package:mpit_final_2024_app/injection.dart';
 
 @RoutePage()
-class ReferencesScreen extends StatefulWidget {
-  const ReferencesScreen({super.key});
+class ArticlesListScreen extends StatefulWidget {
+  const ArticlesListScreen({super.key});
 
   @override
-  State<ReferencesScreen> createState() => _ReferencesScreenState();
+  State<ArticlesListScreen> createState() => _ArticlesListScreenState();
 }
 
-class _ReferencesScreenState extends State<ReferencesScreen> {
-  final articles = [
-    ArticleDto(
-      id: 0,
-      slug: 'slug',
-      title: 'Заголовок о чём-то',
-      text:
-          'С 1 января 2025 года участники СВО смогут рассчитывать на увеличение ежемесячных денежных выплат. Размеры пособий будут пересчитаны с учетом инфляции и увеличения стоимости жизни. Также предусмотрены дополнительные выплаты для семей военнослужащих, которые погибли в ходе выполнения служебных обязанностей.',
-      author: UserDto(
-        id: 0,
-        createdAt: DateTime(2025, 1, 4),
-        updatedAt: DateTime(2025, 1, 4),
-      ),
-      createdAt: DateTime(2025, 1, 4),
-      updatedAt: DateTime(2025, 1, 4),
+class _ArticlesListScreenState extends State<ArticlesListScreen> {
+  final pages = [
+    FutureBuilder<List<ArticleDto>>(
+      future: sl<ArticlesRepository>().getArticles(),
+      builder: (context, snapshot) {
+        final articles = snapshot.data ?? [];
+        return ListView.separated(
+          itemBuilder:
+              (context, index) => InkWell(
+                onTap: () {
+                  sl<AppRouter>().push(
+                    ArticleRoute(articleId: articles[index].id.toInt()),
+                  );
+                },
+                child: ArticleCard(article: articles[index]),
+              ),
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
+          itemCount: articles.length,
+        );
+      },
     ),
-  ];
-
-  late final pages = [
-    ListView.separated(
-      itemBuilder:
-          (context, index) => InkWell(
-            onTap: () {
-              sl<AppRouter>().push(
-                ArticleRoute(articleId: articles[index].id.toInt()),
-              );
-            },
-            child: ArticleCard(article: articles[index]),
-          ),
-      separatorBuilder: (context, index) => const SizedBox(height: 4),
-      itemCount: articles.length,
-    ),
+    Placeholder(),
     Placeholder(),
     Placeholder(),
   ];
@@ -67,7 +57,7 @@ class _ReferencesScreenState extends State<ReferencesScreen> {
                   Avatar(size: 36),
                   const SizedBox(width: 12),
                   Text(
-                    'Справочник',
+                    'Статьи',
                     style: GoogleFonts.geologica().copyWith(
                       fontSize: 30,
                       fontWeight: FontWeight.w700,
@@ -76,29 +66,39 @@ class _ReferencesScreenState extends State<ReferencesScreen> {
                 ],
               ),
               const SizedBox(height: 12),
-              Row(
-                children: [
-                  ReferencesTabButton(
-                    pageIndex: 0,
-                    currentIndex: pageIndex,
-                    text: 'Статьи',
-                    onTap: () => setState(() => pageIndex = 0),
-                  ),
-                  const SizedBox(width: 8),
-                  ReferencesTabButton(
-                    pageIndex: 1,
-                    currentIndex: pageIndex,
-                    text: 'Подписки',
-                    onTap: () => setState(() => pageIndex = 1),
-                  ),
-                  const SizedBox(width: 8),
-                  ReferencesTabButton(
-                    pageIndex: 2,
-                    currentIndex: pageIndex,
-                    text: 'Списки',
-                    onTap: () => setState(() => pageIndex = 2),
-                  ),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ReferencesTabButton(
+                      pageIndex: 0,
+                      currentIndex: pageIndex,
+                      text: 'Рекомендации',
+                      onTap: () => setState(() => pageIndex = 0),
+                    ),
+                    const SizedBox(width: 8),
+                    ReferencesTabButton(
+                      pageIndex: 1,
+                      currentIndex: pageIndex,
+                      text: 'В тренде',
+                      onTap: () => setState(() => pageIndex = 1),
+                    ),
+                    const SizedBox(width: 8),
+                    ReferencesTabButton(
+                      pageIndex: 2,
+                      currentIndex: pageIndex,
+                      text: 'Подписки',
+                      onTap: () => setState(() => pageIndex = 2),
+                    ),
+                    const SizedBox(width: 8),
+                    ReferencesTabButton(
+                      pageIndex: 3,
+                      currentIndex: pageIndex,
+                      text: 'Избранное',
+                      onTap: () => setState(() => pageIndex = 3),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

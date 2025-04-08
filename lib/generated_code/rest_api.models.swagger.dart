@@ -543,6 +543,7 @@ extension $UpdateUserDtoExtension on UpdateUserDto {
 class SendMessageDto {
   const SendMessageDto({
     required this.message,
+    this.history,
   });
 
   factory SendMessageDto.fromJson(Map<String, dynamic> json) =>
@@ -553,6 +554,8 @@ class SendMessageDto {
 
   @JsonKey(name: 'message')
   final String message;
+  @JsonKey(name: 'history')
+  final String? history;
   static const fromJsonFactory = _$SendMessageDtoFromJson;
 
   @override
@@ -560,7 +563,10 @@ class SendMessageDto {
     return identical(this, other) ||
         (other is SendMessageDto &&
             (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+                const DeepCollectionEquality()
+                    .equals(other.message, message)) &&
+            (identical(other.history, history) ||
+                const DeepCollectionEquality().equals(other.history, history)));
   }
 
   @override
@@ -568,17 +574,22 @@ class SendMessageDto {
 
   @override
   int get hashCode =>
-      const DeepCollectionEquality().hash(message) ^ runtimeType.hashCode;
+      const DeepCollectionEquality().hash(message) ^
+      const DeepCollectionEquality().hash(history) ^
+      runtimeType.hashCode;
 }
 
 extension $SendMessageDtoExtension on SendMessageDto {
-  SendMessageDto copyWith({String? message}) {
-    return SendMessageDto(message: message ?? this.message);
+  SendMessageDto copyWith({String? message, String? history}) {
+    return SendMessageDto(
+        message: message ?? this.message, history: history ?? this.history);
   }
 
-  SendMessageDto copyWithWrapped({Wrapped<String>? message}) {
+  SendMessageDto copyWithWrapped(
+      {Wrapped<String>? message, Wrapped<String?>? history}) {
     return SendMessageDto(
-        message: (message != null ? message.value : this.message));
+        message: (message != null ? message.value : this.message),
+        history: (history != null ? history.value : this.history));
   }
 }
 
@@ -847,6 +858,49 @@ extension $UpdateArticleDtoExtension on UpdateArticleDto {
     return UpdateArticleDto(
         title: (title != null ? title.value : this.title),
         text: (text != null ? text.value : this.text));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AskArticlesChatbotDto {
+  const AskArticlesChatbotDto({
+    required this.history,
+  });
+
+  factory AskArticlesChatbotDto.fromJson(Map<String, dynamic> json) =>
+      _$AskArticlesChatbotDtoFromJson(json);
+
+  static const toJsonFactory = _$AskArticlesChatbotDtoToJson;
+  Map<String, dynamic> toJson() => _$AskArticlesChatbotDtoToJson(this);
+
+  @JsonKey(name: 'history')
+  final String history;
+  static const fromJsonFactory = _$AskArticlesChatbotDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AskArticlesChatbotDto &&
+            (identical(other.history, history) ||
+                const DeepCollectionEquality().equals(other.history, history)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(history) ^ runtimeType.hashCode;
+}
+
+extension $AskArticlesChatbotDtoExtension on AskArticlesChatbotDto {
+  AskArticlesChatbotDto copyWith({String? history}) {
+    return AskArticlesChatbotDto(history: history ?? this.history);
+  }
+
+  AskArticlesChatbotDto copyWithWrapped({Wrapped<String>? history}) {
+    return AskArticlesChatbotDto(
+        history: (history != null ? history.value : this.history));
   }
 }
 

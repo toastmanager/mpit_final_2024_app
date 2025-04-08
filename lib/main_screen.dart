@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mpit_final_2024_app/core/constants/icon_paths.dart';
+import 'package:mpit_final_2024_app/core/routes/router.dart';
 import 'package:mpit_final_2024_app/core/routes/router.gr.dart';
+import 'package:mpit_final_2024_app/injection.dart';
 
 @RoutePage()
 class MainScreen extends StatelessWidget {
@@ -14,17 +16,18 @@ class MainScreen extends StatelessWidget {
       routes: [
         ProfileRoute(),
         HelpRequestsRoute(),
-        ChatbotRoute(),
-        ReferencesRoute(),
-        VacanciesRoute(),
+        ArticlesListRoute(),
+        EmptyRoute(),
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         final colors = ColorScheme.of(context);
         return Scaffold(
           appBar:
-              tabsRouter.activeIndex == 3
+              tabsRouter.activeIndex == 2
                   ? AppBar(
+                    elevation: 0,
+                    scrolledUnderElevation: 0,
                     actions: [
                       IconButton(onPressed: () {}, icon: Icon(Icons.search)),
                       IconButton(
@@ -46,7 +49,11 @@ class MainScreen extends StatelessWidget {
             showSelectedLabels: true,
             showUnselectedLabels: true,
             onTap: (index) {
-              tabsRouter.setActiveIndex(index);
+              if (index == 3) {
+                sl<AppRouter>().push(ChatbotRoute());
+              } else {
+                tabsRouter.setActiveIndex(index);
+              }
             },
             items: [
               BottomNavigationBarItem(
@@ -72,18 +79,7 @@ class MainScreen extends StatelessWidget {
                 icon: SvgPicture.asset(IconPaths.fileLine),
               ),
               BottomNavigationBarItem(
-                label: 'Чат-бот',
-                activeIcon: SvgPicture.asset(
-                  IconPaths.robotLineFilled,
-                  colorFilter: ColorFilter.mode(
-                    colors.primary,
-                    BlendMode.srcIn,
-                  ),
-                ),
-                icon: SvgPicture.asset(IconPaths.robotLine),
-              ),
-              BottomNavigationBarItem(
-                label: 'Справочник',
+                label: 'Статьи',
                 activeIcon: SvgPicture.asset(
                   IconPaths.checkboxListDetailLineFilled,
                   colorFilter: ColorFilter.mode(
@@ -94,15 +90,15 @@ class MainScreen extends StatelessWidget {
                 icon: SvgPicture.asset(IconPaths.checkboxListDetailLine),
               ),
               BottomNavigationBarItem(
-                label: 'Вакансии',
+                label: 'Чат-бот',
                 activeIcon: SvgPicture.asset(
-                  IconPaths.briefcaseLineFilled,
+                  IconPaths.robotLineFilled,
                   colorFilter: ColorFilter.mode(
                     colors.primary,
                     BlendMode.srcIn,
                   ),
                 ),
-                icon: SvgPicture.asset(IconPaths.briefcaseLine),
+                icon: SvgPicture.asset(IconPaths.robotLine),
               ),
             ],
           ),

@@ -27,6 +27,9 @@ import 'features/auth/data/utils/auth_token_service.dart' as _i250;
 import 'features/auth/domain/cubit/auth_cubit.dart' as _i709;
 import 'features/auth/domain/repositories/auth_repository.dart' as _i1015;
 import 'features/auth/domain/repositories/users_repository.dart' as _i736;
+import 'features/chatbot/data/repositories/chatbot_repository_impl.dart'
+    as _i613;
+import 'features/chatbot/domain/repositories/chatbot_repository.dart' as _i327;
 import 'generated_code/client_index.dart' as _i87;
 import 'generated_code/rest_api.swagger.dart' as _i435;
 
@@ -55,6 +58,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i250.AuthTokenServiceImpl(logger: gh<_i974.Logger>()));
     gh.factory<_i401.AccessTokenInterceptor>(() => _i401.AccessTokenInterceptor(
         authTokenService: gh<_i250.AuthTokenService>()));
+    gh.factory<_i327.ChatbotRepository>(
+        () => _i613.ChatbotRepositoryImpl(restApi: gh<_i435.RestApi>()));
     gh.factory<_i736.UsersRepository>(() => _i86.UsersRepositoryImpl(
           restApi: gh<_i435.RestApi>(),
           logger: gh<_i974.Logger>(),
@@ -65,7 +70,8 @@ extension GetItInjectableX on _i174.GetIt {
           authTokenService: gh<_i250.AuthTokenService>(),
           logger: gh<_i974.Logger>(),
         ));
-    gh.factory<_i508.ArticlesRepository>(() => _i943.ArticlesRepositoryImpl());
+    gh.factory<_i508.ArticlesRepository>(
+        () => _i943.ArticlesRepositoryImpl(restApi: gh<_i435.RestApi>()));
     gh.factory<_i709.AuthCubit>(() => _i709.AuthCubit(
           authRepository: gh<_i1015.AuthRepository>(),
           usersRepository: gh<_i736.UsersRepository>(),

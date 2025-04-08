@@ -236,13 +236,17 @@ final class _$RestApi extends RestApi {
   }
 
   @override
-  Future<Response<String>> _v1ArticlesChatbotQueryGet(
-      {required String? query}) {
+  Future<Response<String>> _v1ArticlesChatbotQueryGet({
+    required String? query,
+    required AskArticlesChatbotDto? body,
+  }) {
     final Uri $url = Uri.parse('/v1/articles/chatbot/${query}');
+    final $body = body;
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
+      body: $body,
     );
     return client.send<String, String>($request);
   }

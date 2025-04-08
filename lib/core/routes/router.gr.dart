@@ -10,19 +10,18 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
+import 'package:mpit_final_2024_app/empty_screen.dart' as _i4;
 import 'package:mpit_final_2024_app/features/articles/presentation/screens/article_screen.dart'
     as _i1;
-import 'package:mpit_final_2024_app/features/auth/presentation/screens/profile_screen.dart'
-    as _i5;
-import 'package:mpit_final_2024_app/features/chatbot/presentation/screens/chatbot_screen.dart'
+import 'package:mpit_final_2024_app/features/articles/presentation/screens/articles_list_screen.dart'
     as _i2;
-import 'package:mpit_final_2024_app/features/hepl_requests/presentation/screens/help_requests_screen.dart'
-    as _i3;
-import 'package:mpit_final_2024_app/features/references/presentation/screens/references_screen.dart'
-    as _i6;
-import 'package:mpit_final_2024_app/features/vacancies/presentation/screens/vacancies_screen.dart'
+import 'package:mpit_final_2024_app/features/auth/presentation/screens/profile_screen.dart'
     as _i7;
-import 'package:mpit_final_2024_app/main_screen.dart' as _i4;
+import 'package:mpit_final_2024_app/features/chatbot/presentation/screens/chatbot_screen.dart'
+    as _i3;
+import 'package:mpit_final_2024_app/features/hepl_requests/presentation/screens/help_requests_screen.dart'
+    as _i5;
+import 'package:mpit_final_2024_app/main_screen.dart' as _i6;
 
 /// generated route for
 /// [_i1.ArticleScreen]
@@ -71,7 +70,26 @@ class ArticleRouteArgs {
 }
 
 /// generated route for
-/// [_i2.ChatbotScreen]
+/// [_i2.ArticlesListScreen]
+class ArticlesListRoute extends _i8.PageRouteInfo<void> {
+  const ArticlesListRoute({List<_i8.PageRouteInfo>? children})
+      : super(
+          ArticlesListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ArticlesListRoute';
+
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.ArticlesListScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i3.ChatbotScreen]
 class ChatbotRoute extends _i8.PageRouteInfo<void> {
   const ChatbotRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -84,13 +102,32 @@ class ChatbotRoute extends _i8.PageRouteInfo<void> {
   static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
-      return const _i2.ChatbotScreen();
+      return const _i3.ChatbotScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i3.HelpRequestsScreen]
+/// [_i4.EmptyScreen]
+class EmptyRoute extends _i8.PageRouteInfo<void> {
+  const EmptyRoute({List<_i8.PageRouteInfo>? children})
+      : super(
+          EmptyRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmptyRoute';
+
+  static _i8.PageInfo page = _i8.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.EmptyScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i5.HelpRequestsScreen]
 class HelpRequestsRoute extends _i8.PageRouteInfo<void> {
   const HelpRequestsRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -103,13 +140,13 @@ class HelpRequestsRoute extends _i8.PageRouteInfo<void> {
   static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
-      return const _i3.HelpRequestsScreen();
+      return const _i5.HelpRequestsScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i4.MainScreen]
+/// [_i6.MainScreen]
 class MainRoute extends _i8.PageRouteInfo<void> {
   const MainRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -122,13 +159,13 @@ class MainRoute extends _i8.PageRouteInfo<void> {
   static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
-      return const _i4.MainScreen();
+      return const _i6.MainScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i5.ProfileScreen]
+/// [_i7.ProfileScreen]
 class ProfileRoute extends _i8.PageRouteInfo<void> {
   const ProfileRoute({List<_i8.PageRouteInfo>? children})
       : super(
@@ -141,45 +178,7 @@ class ProfileRoute extends _i8.PageRouteInfo<void> {
   static _i8.PageInfo page = _i8.PageInfo(
     name,
     builder: (data) {
-      return const _i5.ProfileScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [_i6.ReferencesScreen]
-class ReferencesRoute extends _i8.PageRouteInfo<void> {
-  const ReferencesRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          ReferencesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ReferencesRoute';
-
-  static _i8.PageInfo page = _i8.PageInfo(
-    name,
-    builder: (data) {
-      return const _i6.ReferencesScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [_i7.VacanciesScreen]
-class VacanciesRoute extends _i8.PageRouteInfo<void> {
-  const VacanciesRoute({List<_i8.PageRouteInfo>? children})
-      : super(
-          VacanciesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'VacanciesRoute';
-
-  static _i8.PageInfo page = _i8.PageInfo(
-    name,
-    builder: (data) {
-      return const _i7.VacanciesScreen();
+      return const _i7.ProfileScreen();
     },
   );
 }
