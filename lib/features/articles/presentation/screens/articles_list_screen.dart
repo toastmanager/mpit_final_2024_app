@@ -77,25 +77,25 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    ReferencesTabButton(
+                    ArticlesTabButton(
                       pageIndex: 0,
                       currentIndex: pageIndex,
                       text: 'Новые',
                       onTap: () => setState(() => pageIndex = 0),
                     ),
                     const SizedBox(width: 8),
-                    ReferencesTabButton(
-                      pageIndex: 2,
+                    ArticlesTabButton(
+                      pageIndex: 1,
                       currentIndex: pageIndex,
                       text: 'Подписки',
-                      onTap: () => setState(() => pageIndex = 2),
+                      onTap: () => setState(() => pageIndex = 1),
                     ),
                     const SizedBox(width: 8),
-                    ReferencesTabButton(
-                      pageIndex: 3,
+                    ArticlesTabButton(
+                      pageIndex: 2,
                       currentIndex: pageIndex,
                       text: 'Избранное',
-                      onTap: () => setState(() => pageIndex = 3),
+                      onTap: () => setState(() => pageIndex = 2),
                     ),
                   ],
                 ),
@@ -112,8 +112,8 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
   }
 }
 
-class ReferencesTabButton extends StatelessWidget {
-  const ReferencesTabButton({
+class ArticlesTabButton extends StatelessWidget {
+  const ArticlesTabButton({
     super.key,
     required this.pageIndex,
     this.onTap,
