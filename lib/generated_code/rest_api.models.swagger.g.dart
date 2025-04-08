@@ -179,6 +179,7 @@ CreateHelpRequestDto _$CreateHelpRequestDtoFromJson(
         Map<String, dynamic> json) =>
     CreateHelpRequestDto(
       text: json['text'] as String,
+      title: json['title'] as String,
       type: createHelpRequestDtoTypeFromJson(json['type']),
     );
 
@@ -186,12 +187,14 @@ Map<String, dynamic> _$CreateHelpRequestDtoToJson(
         CreateHelpRequestDto instance) =>
     <String, dynamic>{
       'text': instance.text,
+      'title': instance.title,
       'type': createHelpRequestDtoTypeToJson(instance.type),
     };
 
 HelpRequestDto _$HelpRequestDtoFromJson(Map<String, dynamic> json) =>
     HelpRequestDto(
       uuid: json['uuid'] as String,
+      title: json['title'] as String,
       text: json['text'] as String,
       requesterId: (json['requesterId'] as num).toDouble(),
       volunteerId: (json['volunteerId'] as num?)?.toDouble(),
@@ -204,6 +207,7 @@ HelpRequestDto _$HelpRequestDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$HelpRequestDtoToJson(HelpRequestDto instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
+      'title': instance.title,
       'text': instance.text,
       'requesterId': instance.requesterId,
       'volunteerId': instance.volunteerId,
@@ -217,6 +221,7 @@ UpdateHelpRequestDto _$UpdateHelpRequestDtoFromJson(
         Map<String, dynamic> json) =>
     UpdateHelpRequestDto(
       text: json['text'] as String?,
+      title: json['title'] as String?,
       type: updateHelpRequestDtoTypeNullableFromJson(json['type']),
     );
 
@@ -224,6 +229,7 @@ Map<String, dynamic> _$UpdateHelpRequestDtoToJson(
         UpdateHelpRequestDto instance) =>
     <String, dynamic>{
       'text': instance.text,
+      'title': instance.title,
       'type': updateHelpRequestDtoTypeNullableToJson(instance.type),
     };
 

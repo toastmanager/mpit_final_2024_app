@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
+import 'package:mpit_final_2024_app/core/components/external_tab_button.dart';
 import 'package:mpit_final_2024_app/core/routes/router.dart';
 import 'package:mpit_final_2024_app/core/routes/router.gr.dart';
 import 'package:mpit_final_2024_app/features/articles/domain/repositories/articles_repository.dart';
@@ -24,6 +25,13 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
         return FutureBuilder<List<ArticleDto>>(
           future: sl<ArticlesRepository>().getArticles(),
           builder: (context, snapshot) {
+            if ([
+              ConnectionState.active,
+              ConnectionState.waiting,
+            ].contains(snapshot.connectionState)) {
+              return Center(child: CircularProgressIndicator());
+            }
+
             final articles = snapshot.data ?? [];
             return RefreshIndicator(
               onRefresh: () async => setArticlesState(() {}),
@@ -58,6 +66,7 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -77,21 +86,21 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    ArticlesTabButton(
+                    TabButton(
                       pageIndex: 0,
                       currentIndex: pageIndex,
                       text: 'Новые',
                       onTap: () => setState(() => pageIndex = 0),
                     ),
                     const SizedBox(width: 8),
-                    ArticlesTabButton(
+                    TabButton(
                       pageIndex: 1,
                       currentIndex: pageIndex,
                       text: 'Подписки',
                       onTap: () => setState(() => pageIndex = 1),
                     ),
                     const SizedBox(width: 8),
-                    ArticlesTabButton(
+                    TabButton(
                       pageIndex: 2,
                       currentIndex: pageIndex,
                       text: 'Избранное',
@@ -108,49 +117,6 @@ class _ArticlesListScreenState extends State<ArticlesListScreen> {
         const SizedBox(height: 4),
         Expanded(child: pages[pageIndex]),
       ],
-    );
-  }
-}
-
-class ArticlesTabButton extends StatelessWidget {
-  const ArticlesTabButton({
-    super.key,
-    required this.pageIndex,
-    this.onTap,
-    required this.currentIndex,
-    required this.text,
-  });
-
-  final int pageIndex;
-  final int currentIndex;
-  final String text;
-  final void Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = ColorScheme.of(context);
-    final fonts = TextTheme.of(context);
-    return FilledButton(
-      onPressed: onTap,
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(
-          pageIndex == currentIndex ? colors.primary : colors.surfaceContainer,
-        ),
-        foregroundColor: WidgetStatePropertyAll(
-          pageIndex == currentIndex ? colors.onPrimary : colors.onSurface,
-        ),
-        padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        ),
-      ),
-      child: Text(
-        text,
-        style: fonts.bodySmall?.copyWith(
-          fontWeight: FontWeight.w600,
-          color:
-              pageIndex == currentIndex ? colors.onPrimary : colors.onSurface,
-        ),
-      ),
     );
   }
 }
