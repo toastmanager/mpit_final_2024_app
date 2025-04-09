@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Color(0xFFF2F2F2),
-          contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+          contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: Color(0xFF0D9387), width: 1),

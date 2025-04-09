@@ -29,6 +29,7 @@ dependencies:
   json_annotation: ^4.9.0
   logger: ^2.5.0
   markdown_widget: ^2.3.2+6
+  mask_text_input_formatter: ^2.9.0
   path_provider: ^2.1.5
   shared_preferences: ^2.5.3
   skeletonizer: ^1.4.3

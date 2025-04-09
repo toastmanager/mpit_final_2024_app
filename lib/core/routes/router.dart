@@ -20,6 +20,12 @@ class AppRouter extends RootStackRouter {
     ),
     AutoRoute(path: '/chatbot', page: ChatbotRoute.page),
     AutoRoute(path: '/help-request/:uuid', page: HelpRequestRoute.page),
+    AutoRoute(
+      path: '/help-request/create',
+      page: HelpRequestCreationRoute.page,
+    ),
+    AutoRoute(path: '/auth', page: AuthRoute.page),
+    AutoRoute(path: '/auth/verify', page: CodeVerifyRoute.page),
     AutoRoute(path: '/articles/:articleId', page: ArticleRoute.page),
   ];
 }

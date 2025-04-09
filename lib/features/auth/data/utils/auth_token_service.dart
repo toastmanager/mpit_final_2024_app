@@ -3,6 +3,7 @@ import 'package:mpit_final_2024_app/generated_code/rest_api.models.swagger.dart'
 import 'package:mpit_final_2024_app/injection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthTokenService {
   Future<AuthTokenDto?> refresh();
@@ -16,8 +17,9 @@ abstract class AuthTokenService {
 @Singleton(as: AuthTokenService)
 class AuthTokenServiceImpl implements AuthTokenService {
   final Logger logger;
+  final SharedPreferences sharedPreferences;
 
-  AuthTokenServiceImpl({required this.logger});
+  AuthTokenServiceImpl({required this.logger, required this.sharedPreferences});
 
   String? _accessToken;
   String? _refreshToken;

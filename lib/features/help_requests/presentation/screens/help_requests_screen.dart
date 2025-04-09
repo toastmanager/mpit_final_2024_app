@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
 import 'package:mpit_final_2024_app/core/components/external_tab_button.dart';
+import 'package:mpit_final_2024_app/core/constants/icon_paths.dart';
 import 'package:mpit_final_2024_app/core/routes/router.dart';
 import 'package:mpit_final_2024_app/core/routes/router.gr.dart';
 import 'package:mpit_final_2024_app/features/help_requests/domain/repositories/help_requests_repository.dart';
@@ -155,6 +157,8 @@ class _HelpRequestsScreenState extends State<HelpRequestsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final fonts = TextTheme.of(context);
+    final colors = ColorScheme.of(context);
     return Column(
       children: [
         Padding(
@@ -178,22 +182,59 @@ class _HelpRequestsScreenState extends State<HelpRequestsScreen> {
               const SizedBox(height: 12),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    TabButton(
-                      pageIndex: 0,
-                      currentIndex: pageIndex,
-                      text: 'Активные',
-                      onTap: () => setState(() => pageIndex = 0),
-                    ),
-                    const SizedBox(width: 8),
-                    TabButton(
-                      pageIndex: 1,
-                      currentIndex: pageIndex,
-                      text: 'История',
-                      onTap: () => setState(() => pageIndex = 1),
-                    ),
-                  ],
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Row(
+                    children: [
+                      Row(
+                        children: [
+                          TabButton(
+                            pageIndex: 0,
+                            currentIndex: pageIndex,
+                            text: 'Активные',
+                            onTap: () => setState(() => pageIndex = 0),
+                          ),
+                          const SizedBox(width: 8),
+                          TabButton(
+                            pageIndex: 1,
+                            currentIndex: pageIndex,
+                            text: 'История',
+                            onTap: () => setState(() => pageIndex = 1),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      FilledButton(
+                        onPressed: () {
+                          context.pushRoute(HelpRequestCreationRoute());
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(
+                            colors.surfaceContainer,
+                          ),
+                          foregroundColor: WidgetStatePropertyAll(
+                            colors.onSurface,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              IconPaths.filePlusLine,
+                              width: 24,
+                              height: 24,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Создать',
+                              style: fonts.bodySmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
