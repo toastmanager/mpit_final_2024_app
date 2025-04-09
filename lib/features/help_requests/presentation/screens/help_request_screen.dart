@@ -10,6 +10,7 @@ import 'package:mpit_final_2024_app/features/help_requests/domain/repositories/h
 import 'package:mpit_final_2024_app/generated_code/rest_api.models.swagger.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.swagger.dart';
 import 'package:mpit_final_2024_app/injection.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class HelpRequestScreen extends StatelessWidget {
@@ -97,7 +98,7 @@ class HelpRequestScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     Divider(),
                     const SizedBox(height: 10),
-                    if (request.volunteerId != null) ...[
+                    if (request.volunteerTg != null) ...[
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
@@ -111,14 +112,20 @@ class HelpRequestScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Напишите волонтёру в телеграм'),
-                                    Text(request.volunteerId.toString()),
+                                    Text('@${request.volunteerTg}'),
                                   ],
                                 ),
                               ],
                             ),
                             const SizedBox(height: 12),
                             FilledButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await launchUrl(
+                                  Uri.parse(
+                                    'https://t.me/${request.volunteerTg}',
+                                  ),
+                                );
+                              },
                               child: Text('Написать в телеграм'),
                             ),
                           ],

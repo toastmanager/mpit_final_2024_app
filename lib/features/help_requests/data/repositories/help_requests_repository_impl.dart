@@ -67,11 +67,7 @@ class HelpRequestsRepositoryImpl extends HelpRequestsRepository {
     CreateHelpRequestDto createHelpRequestDto,
   ) async {
     final response = await restApi.v1HelpRequestsPost(
-      body: CreateHelpRequestDto(
-        text: createHelpRequestDto.title,
-        title: createHelpRequestDto.title,
-        type: createHelpRequestDto.type,
-      ),
+      body: createHelpRequestDto,
     );
     final helpRequest = response.body;
     return helpRequest;

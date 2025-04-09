@@ -22,63 +22,55 @@ class HelpRequestsScreen extends StatefulWidget {
 
 class _HelpRequestsScreenState extends State<HelpRequestsScreen> {
   final List<Widget> pages = [
-    StatefulBuilder(
-      builder: (context, setArticlesState) {
+    BlocBuilder<HelpRequestsListCubit, HelpRequestsListState>(
+      builder: (context, state) {
         final colors = ColorScheme.of(context);
         final fonts = TextTheme.of(context);
+        final helpRequests = state.when(
+          initial: (helpRequests) => helpRequests,
+        );
 
-        return BlocBuilder<HelpRequestsListCubit, HelpRequestsListState>(
-          builder: (context, state) {
-            final helpRequests = state.when(
-              initial: (helpRequests) => helpRequests,
-            );
-
-            if (helpRequests.isEmpty) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'У вас нет активных заявок',
-                    style: fonts.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Не стесняйтесь, мы\nтолько рады вам помочь',
-                    textAlign: TextAlign.center,
-                    style: fonts.bodyMedium?.copyWith(
-                      color: colors.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-              );
-            }
-
-            return RefreshIndicator(
-              onRefresh: () async => setArticlesState(() {}),
-              child: ListView.separated(
-                itemBuilder:
-                    (context, index) => InkWell(
-                      onTap: () {
-                        sl<AppRouter>().push(
-                          HelpRequestRoute(uuid: helpRequests[index].uuid),
-                        );
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          HelpRequestCard(helpRequest: helpRequests[index]),
-                          Divider(),
-                        ],
-                      ),
-                    ),
-                separatorBuilder:
-                    (context, index) => const SizedBox(height: 16),
-                itemCount: helpRequests.length,
+        if (helpRequests.isEmpty) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'У вас нет активных заявок',
+                style: fonts.bodyMedium?.copyWith(fontWeight: FontWeight.w800),
               ),
-            );
-          },
+              const SizedBox(height: 12),
+              Text(
+                'Не стесняйтесь, мы\nтолько рады вам помочь',
+                textAlign: TextAlign.center,
+                style: fonts.bodyMedium?.copyWith(
+                  color: colors.onSurfaceVariant,
+                ),
+              ),
+            ],
+          );
+        }
+
+        return RefreshIndicator(
+          onRefresh: () => context.read<HelpRequestsListCubit>().findAll(),
+          child: ListView.separated(
+            itemBuilder:
+                (context, index) => InkWell(
+                  onTap: () {
+                    sl<AppRouter>().push(
+                      HelpRequestRoute(uuid: helpRequests[index].uuid),
+                    );
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      HelpRequestCard(helpRequest: helpRequests[index]),
+                      Divider(),
+                    ],
+                  ),
+                ),
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
+            itemCount: helpRequests.length,
+          ),
         );
       },
     ),
@@ -109,8 +101,7 @@ class _HelpRequestsScreenState extends State<HelpRequestsScreen> {
         }
 
         return RefreshIndicator(
-          onRefresh:
-              () async => context.read<HelpRequestsListCubit>().findAll(),
+          onRefresh: () => context.read<HelpRequestsListCubit>().findAll(),
           child: ListView.separated(
             itemBuilder:
                 (context, index) => InkWell(

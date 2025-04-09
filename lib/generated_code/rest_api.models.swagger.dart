@@ -894,7 +894,7 @@ class HelpRequestDto {
     required this.title,
     required this.text,
     required this.requesterId,
-    this.volunteerId,
+    this.volunteerTg,
     required this.type,
     required this.status,
     required this.createdAt,
@@ -915,8 +915,8 @@ class HelpRequestDto {
   final String text;
   @JsonKey(name: 'requesterId')
   final double requesterId;
-  @JsonKey(name: 'volunteerId')
-  final double? volunteerId;
+  @JsonKey(name: 'volunteerTg')
+  final String? volunteerTg;
   @JsonKey(
     name: 'type',
     toJson: helpRequestDtoTypeToJson,
@@ -948,9 +948,9 @@ class HelpRequestDto {
             (identical(other.requesterId, requesterId) ||
                 const DeepCollectionEquality()
                     .equals(other.requesterId, requesterId)) &&
-            (identical(other.volunteerId, volunteerId) ||
+            (identical(other.volunteerTg, volunteerTg) ||
                 const DeepCollectionEquality()
-                    .equals(other.volunteerId, volunteerId)) &&
+                    .equals(other.volunteerTg, volunteerTg)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)) &&
             (identical(other.status, status) ||
@@ -972,7 +972,7 @@ class HelpRequestDto {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(text) ^
       const DeepCollectionEquality().hash(requesterId) ^
-      const DeepCollectionEquality().hash(volunteerId) ^
+      const DeepCollectionEquality().hash(volunteerTg) ^
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(createdAt) ^
@@ -986,7 +986,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
       String? title,
       String? text,
       double? requesterId,
-      double? volunteerId,
+      String? volunteerTg,
       enums.HelpRequestDtoType? type,
       enums.HelpRequestDtoStatus? status,
       DateTime? createdAt,
@@ -996,7 +996,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
         title: title ?? this.title,
         text: text ?? this.text,
         requesterId: requesterId ?? this.requesterId,
-        volunteerId: volunteerId ?? this.volunteerId,
+        volunteerTg: volunteerTg ?? this.volunteerTg,
         type: type ?? this.type,
         status: status ?? this.status,
         createdAt: createdAt ?? this.createdAt,
@@ -1008,7 +1008,7 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
       Wrapped<String>? title,
       Wrapped<String>? text,
       Wrapped<double>? requesterId,
-      Wrapped<double?>? volunteerId,
+      Wrapped<String?>? volunteerTg,
       Wrapped<enums.HelpRequestDtoType>? type,
       Wrapped<enums.HelpRequestDtoStatus>? status,
       Wrapped<DateTime>? createdAt,
@@ -1019,8 +1019,8 @@ extension $HelpRequestDtoExtension on HelpRequestDto {
         text: (text != null ? text.value : this.text),
         requesterId:
             (requesterId != null ? requesterId.value : this.requesterId),
-        volunteerId:
-            (volunteerId != null ? volunteerId.value : this.volunteerId),
+        volunteerTg:
+            (volunteerTg != null ? volunteerTg.value : this.volunteerTg),
         type: (type != null ? type.value : this.type),
         status: (status != null ? status.value : this.status),
         createdAt: (createdAt != null ? createdAt.value : this.createdAt),
