@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mpit_final_2024_app/core/components/expanded_horizontally.dart';
+import 'package:mpit_final_2024_app/features/help_requests/domain/cubit/help_requests_list_cubit.dart';
 import 'package:mpit_final_2024_app/features/help_requests/domain/repositories/help_requests_repository.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.enums.swagger.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.models.swagger.dart';
@@ -100,10 +102,11 @@ class HelpRequestCreationScreen extends StatelessWidget {
                             if (formKey.currentState?.saveAndValidate() ??
                                 true) {
                               final form = formKey.currentState!.value;
-                              context.maybePop();
                               await sl<HelpRequestsRepository>().create(
                                 CreateHelpRequestDto.fromJson(form),
                               );
+                              context.read<HelpRequestsListCubit>().findAll();
+                              context.maybePop();
                             }
                           },
                           child: Text('Создать заявку'),

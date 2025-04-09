@@ -32,6 +32,8 @@ import 'features/chatbot/data/repositories/chatbot_repository_impl.dart'
 import 'features/chatbot/domain/repositories/chatbot_repository.dart' as _i327;
 import 'features/help_requests/data/repositories/help_requests_repository_impl.dart'
     as _i511;
+import 'features/help_requests/domain/cubit/help_requests_list_cubit.dart'
+    as _i114;
 import 'features/help_requests/domain/repositories/help_requests_repository.dart'
     as _i711;
 import 'generated_code/client_index.dart' as _i87;
@@ -66,6 +68,8 @@ extension GetItInjectableX on _i174.GetIt {
           restApi: gh<_i435.RestApi>(),
           logger: gh<_i974.Logger>(),
         ));
+    gh.factory<_i114.HelpRequestsListCubit>(() => _i114.HelpRequestsListCubit(
+        helpRequestsRepository: gh<_i711.HelpRequestsRepository>()));
     gh.factory<_i508.ArticlesRepository>(
         () => _i943.ArticlesRepositoryImpl(restApi: gh<_i435.RestApi>()));
     gh.singleton<_i250.AuthTokenService>(() => _i250.AuthTokenServiceImpl(

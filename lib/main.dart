@@ -1,5 +1,6 @@
 import 'package:mpit_final_2024_app/core/routes/router.dart';
 import 'package:mpit_final_2024_app/features/auth/domain/cubit/auth_cubit.dart';
+import 'package:mpit_final_2024_app/features/help_requests/domain/cubit/help_requests_list_cubit.dart';
 import 'package:mpit_final_2024_app/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,9 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl<AuthCubit>()..intialLoadMe()),
+        BlocProvider(
+          create: (context) => sl<HelpRequestsListCubit>()..findAll(),
+        ),
       ],
       child: const MyApp(),
     ),

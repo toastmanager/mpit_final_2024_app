@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
 import 'package:mpit_final_2024_app/core/components/toast.dart';
+import 'package:mpit_final_2024_app/features/help_requests/domain/cubit/help_requests_list_cubit.dart';
 import 'package:mpit_final_2024_app/features/help_requests/domain/repositories/help_requests_repository.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.models.swagger.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.swagger.dart';
@@ -29,6 +31,7 @@ class HelpRequestScreen extends StatelessWidget {
           TextButton(
             onPressed: () async {
               await sl<HelpRequestsRepository>().delete(uuid);
+              context.read<HelpRequestsListCubit>().findAll();
               context.maybePop();
             },
             child: Text('Удалить'),
