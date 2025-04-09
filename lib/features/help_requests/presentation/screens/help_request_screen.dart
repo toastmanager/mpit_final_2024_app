@@ -25,6 +25,15 @@ class HelpRequestScreen extends StatelessWidget {
           'Ваша заявка',
           style: fonts.bodySmall?.copyWith(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              await sl<HelpRequestsRepository>().delete(uuid);
+              context.maybePop();
+            },
+            child: Text('Удалить'),
+          ),
+        ],
       ),
       body: SafeArea(
         child: FutureBuilder<HelpRequestDto?>(
