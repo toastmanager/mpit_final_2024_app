@@ -61,4 +61,22 @@ class HelpRequestsRepositoryImpl extends HelpRequestsRepository {
         return 'Неизвестный тип';
     }
   }
+
+  @override
+  Future<HelpRequestDto?> create(
+    CreateHelpRequestDto createHelpRequestDto,
+  ) async {
+    final response = await restApi.v1HelpRequestsPost(
+      body: createHelpRequestDto,
+    );
+    final helpRequest = response.body;
+    return helpRequest;
+  }
+
+  @override
+  Future<HelpRequestDto?> delete(String uuid) async {
+    final response = await restApi.v1HelpRequestsUuidDelete(uuid: uuid);
+    final helpRequest = response.body;
+    return helpRequest;
+  }
 }

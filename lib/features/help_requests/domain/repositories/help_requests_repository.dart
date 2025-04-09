@@ -5,4 +5,6 @@ abstract class HelpRequestsRepository {
   Future<HelpRequestDto?> findOne(String uuid);
   String getStatusString(HelpRequestDtoStatus status);
   String getTypeString(HelpRequestDtoType type);
+  Future<HelpRequestDto?> create(CreateHelpRequestDto createHelpRequestDto);
+  Future<HelpRequestDto?> delete(String uuid);
 }

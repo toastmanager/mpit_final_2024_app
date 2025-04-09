@@ -14,7 +14,7 @@ import 'package:injectable/injectable.dart';
 
 //   const CookieInterceptor({required this.prefs});
 
-//   static const String _cookieKey = 'cookies';
+// static const String _cookieKey = 'cookies';
 
 //   @override
 //   FutureOr<Response<BodyType>> intercept<BodyType>(

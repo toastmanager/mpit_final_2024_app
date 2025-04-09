@@ -428,25 +428,6 @@ abstract class RestApi extends ChopperService {
 
   ///
   ///@param uuid
-  Future<chopper.Response<HelpRequestDto>> v1HelpRequestsUuidVolunteerPost(
-      {required String? uuid}) {
-    generatedMapping.putIfAbsent(
-        HelpRequestDto, () => HelpRequestDto.fromJsonFactory);
-
-    return _v1HelpRequestsUuidVolunteerPost(uuid: uuid);
-  }
-
-  ///
-  ///@param uuid
-  @Post(
-    path: '/v1/help-requests/{uuid}/volunteer',
-    optionalBody: true,
-  )
-  Future<chopper.Response<HelpRequestDto>> _v1HelpRequestsUuidVolunteerPost(
-      {@Path('uuid') required String? uuid});
-
-  ///
-  ///@param uuid
   Future<chopper.Response<HelpRequestDto>> v1HelpRequestsUuidVolunteerDelete(
       {required String? uuid}) {
     generatedMapping.putIfAbsent(

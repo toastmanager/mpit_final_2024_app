@@ -12,6 +12,8 @@ class IconPaths {
   static const eyeLine = 'assets/icons/eye-line.svg';
   static const fileLine = 'assets/icons/file-line.svg';
   static const fileLineFilled = 'assets/icons/file-line-filled.svg';
+  static const filePlusLine = 'assets/icons/file-plus-line.svg';
+  static const filePlusLineFilled = 'assets/icons/file-plus-line-filled.svg';
   static const homeLine = 'assets/icons/home-line.svg';
   static const homeLineFilled = 'assets/icons/home-line-filled.svg';
   static const robotLine = 'assets/icons/robot-line.svg';

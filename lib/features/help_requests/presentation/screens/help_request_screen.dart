@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mpit_final_2024_app/core/components/avatar.dart';
 import 'package:mpit_final_2024_app/core/components/toast.dart';
+import 'package:mpit_final_2024_app/features/help_requests/domain/cubit/help_requests_list_cubit.dart';
 import 'package:mpit_final_2024_app/features/help_requests/domain/repositories/help_requests_repository.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.models.swagger.dart';
 import 'package:mpit_final_2024_app/generated_code/rest_api.swagger.dart';
 import 'package:mpit_final_2024_app/injection.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
 class HelpRequestScreen extends StatelessWidget {
@@ -25,6 +28,16 @@ class HelpRequestScreen extends StatelessWidget {
           'Ваша заявка',
           style: fonts.bodySmall?.copyWith(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              await sl<HelpRequestsRepository>().delete(uuid);
+              context.read<HelpRequestsListCubit>().findAll();
+              context.maybePop();
+            },
+            child: Text('Удалить'),
+          ),
+        ],
       ),
       body: SafeArea(
         child: FutureBuilder<HelpRequestDto?>(
@@ -85,7 +98,7 @@ class HelpRequestScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     Divider(),
                     const SizedBox(height: 10),
-                    if (request.volunteerId != null) ...[
+                    if (request.volunteerTg != null) ...[
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Column(
@@ -99,14 +112,20 @@ class HelpRequestScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Напишите волонтёру в телеграм'),
-                                    Text(request.volunteerId.toString()),
+                                    Text('@${request.volunteerTg}'),
                                   ],
                                 ),
                               ],
                             ),
                             const SizedBox(height: 12),
                             FilledButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await launchUrl(
+                                  Uri.parse(
+                                    'https://t.me/${request.volunteerTg}',
+                                  ),
+                                );
+                              },
                               child: Text('Написать в телеграм'),
                             ),
                           ],

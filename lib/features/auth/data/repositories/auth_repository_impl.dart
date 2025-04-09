@@ -51,6 +51,29 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
+  Future<void> requestCode(String tel) async {
+    final response = await restApi.v1AuthOtpRequestPost(
+      body: RequestOTPDto(tel: tel),
+    );
+    if (response.error != null) {
+      logger.e(response.error);
+    }
+  }
+
+  @override
+  Future<AuthTokenDto?> verifyCode(String tel, String code) async {
+    final response = await restApi.v1AuthOtpVerifyPost(
+      body: VerifyOTPDto(tel: tel, otp: code),
+    );
+    final authToken = response.body;
+    if (authToken != null) {
+      authTokenService.setAccessToken(authToken.accessToken);
+      authTokenService.setRefreshToken(authToken.refreshToken);
+    }
+    return authToken;
+  }
+
   // @override
   // Future<UserSensitiveDto> updateMe(
   //   UpdateMeDto form,

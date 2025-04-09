@@ -9,10 +9,10 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
     AutoRoute(
       path: '/',
-      page: MainRoute.page,
+      page: GlobalRoute.page,
       initial: true,
       children: [
-        AutoRoute(path: 'profile', page: ProfileRoute.page),
+        AutoRoute(path: '', page: HomeRoute.page),
         AutoRoute(path: 'help-requests', page: HelpRequestsRoute.page),
         AutoRoute(path: 'articles-list', page: ArticlesListRoute.page),
         AutoRoute(path: '_', page: EmptyRoute.page),
@@ -20,6 +20,12 @@ class AppRouter extends RootStackRouter {
     ),
     AutoRoute(path: '/chatbot', page: ChatbotRoute.page),
     AutoRoute(path: '/help-request/:uuid', page: HelpRequestRoute.page),
+    AutoRoute(
+      path: '/help-request/create',
+      page: HelpRequestCreationRoute.page,
+    ),
+    AutoRoute(path: '/auth', page: AuthRoute.page),
+    AutoRoute(path: '/auth/verify', page: CodeVerifyRoute.page),
     AutoRoute(path: '/articles/:articleId', page: ArticleRoute.page),
   ];
 }
