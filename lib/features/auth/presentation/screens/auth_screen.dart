@@ -43,6 +43,7 @@ class AuthScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 80),
                         TextField(
+                          keyboardType: TextInputType.number,
                           controller: telController,
                           decoration: InputDecoration(
                             hintText: '+1 (234) 567-89-01',

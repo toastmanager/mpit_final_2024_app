@@ -21,9 +21,11 @@ class AuthTokenServiceImpl implements AuthTokenService {
 
   AuthTokenServiceImpl({required this.logger, required this.sharedPreferences});
 
+  static const _refreshTokenKey = 'refreshToken';
+  static const String _tokenType = 'Bearer';
+
   String? _accessToken;
-  String? _refreshToken;
-  final String _tokenType = 'Bearer';
+  late String? _refreshToken = sharedPreferences.getString(_refreshTokenKey);
 
   @override
   String? getAccessToken() {
@@ -49,6 +51,7 @@ class AuthTokenServiceImpl implements AuthTokenService {
     }
     final authToken = authTokenResponse.body!;
     setAccessToken(authToken.accessToken);
+    setRefreshToken(authToken.refreshToken);
     return authToken;
   }
 
@@ -60,6 +63,11 @@ class AuthTokenServiceImpl implements AuthTokenService {
   @override
   void setRefreshToken(String? refreshToken) {
     _refreshToken = refreshToken;
+    if (refreshToken == null) {
+      sharedPreferences.remove(_refreshTokenKey);
+    } else {
+      sharedPreferences.setString(_refreshTokenKey, _refreshToken!);
+    }
   }
 
   @override

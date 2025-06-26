@@ -8,41 +8,6 @@ import 'package:mpit_final_2024_app/injection.dart';
 import 'package:chopper/chopper.dart';
 import 'package:injectable/injectable.dart';
 
-// @injectable
-// class CookieInterceptor implements Interceptor {
-//   final SharedPreferences prefs;
-
-//   const CookieInterceptor({required this.prefs});
-
-// static const String _cookieKey = 'cookies';
-
-//   @override
-//   FutureOr<Response<BodyType>> intercept<BodyType>(
-//     Chain<BodyType> chain,
-//   ) async {
-//     Request request = chain.request;
-
-//     // Retrieve stored cookies and attach them to the request
-//     final storedCookies = prefs.getString(_cookieKey) ?? '';
-//     if (storedCookies.isNotEmpty) {
-//       request = request.copyWith(
-//         headers: {...request.headers, 'Cookie': storedCookies},
-//       );
-//     }
-
-//     // Proceed with the request and get the response
-//     final response = await chain.proceed(request);
-
-//     // Extract and store cookies from the response
-//     final rawCookies = response.headers['set-cookie'];
-//     if (rawCookies != null) {
-//       prefs.setString(_cookieKey, rawCookies);
-//     }
-
-//     return response;
-//   }
-// }
-
 @injectable
 class AccessTokenInterceptor implements Interceptor {
   final AuthTokenService authTokenService;
@@ -108,9 +73,6 @@ abstract class NetworkModule {
   RestApi get restApi => RestApi.create(
     baseUrl: Uri.parse(EnvConstants.apiBaseUrl),
     authenticator: AuthInterceptor(),
-    interceptors: [
-      sl<AccessTokenInterceptor>(),
-      // sl<CookieInterceptor>(),
-    ],
+    interceptors: [sl<AccessTokenInterceptor>()],
   );
 }

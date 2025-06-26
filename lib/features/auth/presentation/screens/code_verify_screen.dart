@@ -37,6 +37,7 @@ class CodeVerifyScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   TextField(
+                    keyboardType: TextInputType.number,
                     controller: codeController,
                     inputFormatters: [
                       MaskTextInputFormatter(

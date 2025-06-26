@@ -38,6 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> logout() async {
     try {
+      authTokenService.setAccessToken(null);
       final refreshToken = authTokenService.getRefreshToken();
       if (refreshToken == null) {
         return;
